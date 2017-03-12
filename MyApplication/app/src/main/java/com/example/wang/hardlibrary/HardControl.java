@@ -7,7 +7,7 @@ public class HardControl {
 
     static {
         try {
-            System.loadLibrary("libhardcontrol");
+            System.loadLibrary("hardcontrol");
         } catch (Exception e) {
             e.printStackTrace();
         }

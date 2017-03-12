@@ -10,7 +10,7 @@
     tools:context=".MainActivity"
     android:orientation="vertical" >
 
-    <TextView android:text="www.100ask.net, 100ask.taobao.com, for LEDDemo"
+    <TextView android:text="LEDDemo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
