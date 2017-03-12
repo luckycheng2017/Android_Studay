@@ -1,6 +1,5 @@
 package com.example.wang.hardlibrary;
 
-import android.content.Context;
 
 public class HardControl {
 
