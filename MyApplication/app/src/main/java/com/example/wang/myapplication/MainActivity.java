@@ -1,5 +1,6 @@
 package com.example.wang.myapplication;
 
+import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,10 +8,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-import com.example.wang.hardlibrary.HardControl;
+import android.os.ILedService;
+import android.os.ServiceManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private boolean ledon = false;
     private Button button = null;
     private CheckBox checkBoxLed1 = null;
@@ -18,11 +21,11 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox checkBoxLed3 = null;
     private CheckBox checkBoxLed4 = null;
 
+    private ILedService iLedService = null;
+
     class MyButtonListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
-            HardControl hardControl = new HardControl();
 
             ledon = !ledon;
             if (ledon) {
@@ -32,8 +35,12 @@ public class MainActivity extends AppCompatActivity {
                 checkBoxLed3.setChecked(true);
                 checkBoxLed4.setChecked(true);
 
-                for (int i = 0; i < 4; i++) {
-                    hardControl.ledCtrl(i, 1);
+                try {
+                    for (int i = 0; i < 4; i++) {
+                        iLedService.ledCtrl(i, 1);
+                    }
+                } catch (RemoteException e) {
+                    e.printStackTrace();
                 }
             }
             else {
@@ -43,15 +50,18 @@ public class MainActivity extends AppCompatActivity {
                 checkBoxLed3.setChecked(false);
                 checkBoxLed4.setChecked(false);
 
-                for (int i = 0; i < 4; i++) {
-                    hardControl.ledCtrl(i, 0);
+                try {
+                    for (int i = 0; i < 4; i++) {
+                        iLedService.ledCtrl(i, 0);
+                    }
+                } catch (RemoteException e) {
+                    e.printStackTrace();
                 }
             }
         }
     }
 
     public void onCheckboxClicked(View view) {
-        HardControl.getInstance().ledOpen();
 
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
@@ -60,24 +70,40 @@ public class MainActivity extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.LED1:
                 if (checked) {
-                    HardControl.getInstance().ledCtrl(0, 1);
+                    try {
+                        iLedService.ledCtrl(0, 1);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                     // Put some meat on the sandwich
                     Toast.makeText(getApplicationContext(), "LED1 on", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    HardControl.getInstance().ledCtrl(0, 0);
+                    try {
+                        iLedService.ledCtrl(0, 0);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                     // Remove the meat
                     Toast.makeText(getApplicationContext(), "LED1 off", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.LED2:
                 if (checked) {
-                    HardControl.getInstance().ledCtrl(1, 1);
+                    try {
+                        iLedService.ledCtrl(1, 1);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                     // Put some meat on the sandwich
                     Toast.makeText(getApplicationContext(), "LED2 on", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    HardControl.getInstance().ledCtrl(1, 0);
+                    try {
+                        iLedService.ledCtrl(1, 0);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                     // Remove the meat
                     Toast.makeText(getApplicationContext(), "LED2 off", Toast.LENGTH_SHORT).show();
                 }
@@ -85,12 +111,20 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.LED3:
                 if (checked) {
-                    HardControl.getInstance().ledCtrl(2, 1);
+                    try {
+                        iLedService.ledCtrl(2, 1);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                     // Put some meat on the sandwich
                     Toast.makeText(getApplicationContext(), "LED3 on", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    HardControl.getInstance().ledCtrl(2, 0);
+                    try {
+                        iLedService.ledCtrl(2, 0);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                     // Remove the meat
                     Toast.makeText(getApplicationContext(), "LED3 off", Toast.LENGTH_SHORT).show();
                 }
@@ -98,12 +132,20 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.LED4:
                 if (checked) {
-                    HardControl.getInstance().ledCtrl(3, 1);
+                    try {
+                        iLedService.ledCtrl(3, 1);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                     // Put some meat on the sandwich
                     Toast.makeText(getApplicationContext(), "LED4 on", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    HardControl.getInstance().ledCtrl(3, 0);
+                    try {
+                        iLedService.ledCtrl(3, 0);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                     // Remove the meat
                     Toast.makeText(getApplicationContext(), "LED4 off", Toast.LENGTH_SHORT).show();
                 }
@@ -116,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        HardControl.ledOpen();
+        iLedService = ILedService.Stub.asInterface(ServiceManager.getService("led"));
 
         button = (Button) findViewById(R.id.BUTTON);
 
@@ -131,6 +173,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        HardControl.getInstance().ledClose();
     }
 }
