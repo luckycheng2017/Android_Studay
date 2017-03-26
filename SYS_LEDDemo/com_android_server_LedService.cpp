@@ -16,34 +16,53 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 
+#include <hardware/led_hal.h>
+
 
 namespace android
 {
 
-static jint fd;
+static led_device_t* led_device;
+static hw_device_t* device;
 
 jint ledOpen(JNIEnv *env, jobject cls)
 {
-	fd = open("/dev/leds", O_RDWR);
-	ALOGI("native ledOpen : %d", fd);
-	if (fd >= 0)
-		return 0;
-	else
-		return -1;
+	jint err;
+    hw_module_t* module;
+    
+    ALOGI("native ledOpen ...");
+    
+    err = hw_get_module("led", (hw_module_t const**)&module);
+    if (err == 0 ) {
+    	err = module->methods->open(module, NULL, &device);
+    	
+    	if (err == 0 ) {
+    		led_device = (led_device_t *)device;
+    		return led_device->led_open(led_device);
+    	} else {
+    		return -1;
+    	}
+    }
+    
+    return -1;
 }
 
 void ledClose(JNIEnv *env, jobject cls)
 {
+	jint err;
+	hw_module_t* module;
 	ALOGI("native ledClose ...");
-	close(fd);
+	err = hw_get_module("led", (hw_module_t const**)&module);
+    if (err == 0 ) {
+    		led_device->common.close(device);
+    }
 }
 
 
 jint ledCtrl(JNIEnv *env, jobject cls, jint which, jint status)
 {
-	int ret = ioctl(fd, status, which);
-	ALOGI("native ledCtrl : %d, %d, %d", which, status, ret);
-	return ret;
+	ALOGI("native ledCtrl %d, %d", which, status);
+	return led_device->led_ctrl(led_device, which, status);
 }
 
 
@@ -59,6 +78,4 @@ int register_android_server_LedService(JNIEnv *env)
     return jniRegisterNativeMethods(env, "com/android/server/LedService",
             methods, NELEM(methods));
 }
-
-}
-
+};
