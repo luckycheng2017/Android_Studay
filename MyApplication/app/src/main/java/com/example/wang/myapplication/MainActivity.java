@@ -193,7 +193,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         try {
 //            iLedService = ILedService.Stub.asInterface(ServiceManager.getService("led"));
             Method getService = Class.forName("android.os.ServiceManager").getMethod("getService", String.class);
