@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.example.wang.app_lightdemo.MainActivity">
 
     <Button
@@ -15,5 +16,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/button"
         android:textAllCaps="false"
-        android:text="Flashing Light at 20S" />
+        android:text="Flashing Light at 65S" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekbar"
+        android:layout_marginTop="30dp"
+        android:max="100"
+        android:progress="50" />
 </LinearLayout>
