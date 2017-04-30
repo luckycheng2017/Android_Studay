@@ -1,13 +1,18 @@
+
 /* Copyright 2008 The Android Open Source Project
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <linux/types.h>
+#include<stdbool.h>
+#include <string.h>
+
+#include <private/android_filesystem_config.h>
 
 #include "binder.h"
 #include "test_server.h"
-
 
 int svcmgr_publish(struct binder_state *bs, uint32_t target, const char *name, void *ptr)
 {
@@ -31,36 +36,42 @@ int svcmgr_publish(struct binder_state *bs, uint32_t target, const char *name, v
     return status;
 }
 
-void sayhello(void) {
+void sayhello(void)
+{
 	static int cnt = 0;
 	fprintf(stderr, "say hello : %d\n", cnt++);
 }
 
-int sayhello_to(char *name ) {
+
+int sayhello_to(char *name)
+{
 	static int cnt = 0;
 	fprintf(stderr, "say hello to %s : %d\n", name, cnt++);
 	return cnt;
 }
 
+
 int hello_service_handler(struct binder_state *bs,
                    struct binder_transaction_data *txn,
                    struct binder_io *msg,
-                   struct binder_io *reply) {
-	/* Ê†πÊçÆtxn->codeÁü•ÈÅìË¶ÅË∞ÉÁî®Âì™‰∏Ä‰∏™ÂáΩÊï∞
-	 * Â¶ÇÊûúÈúÄË¶ÅÂèÇÊï∞, ÂèØ‰ª•‰ªémsgÂèñÂá∫
-	 * Â¶ÇÊûúË¶ÅËøîÂõûÁªìÊûú, ÂèØ‰ª•ÊääÁªìÊûúÊîæÂÖ•reply
+                   struct binder_io *reply)
+{
+	/* ∏˘æ›txn->code÷™µ¿“™µ˜”√ƒƒ“ª∏ˆ∫Ø ˝
+	 * »Áπ˚–Ë“™≤Œ ˝, ø…“‘¥”msg»°≥ˆ
+	 * »Áπ˚“™∑µªÿΩ·π˚, ø…“‘∞—Ω·π˚∑≈»Îreply
 	 */
 
 	/* sayhello
 	 * sayhello_to
 	 */
-	 
+	
     uint16_t *s;
-    char name[512];
+	char name[512];
     size_t len;
     uint32_t handle;
     uint32_t strict_policy;
-    int i;
+	int i;
+
 
     // Equivalent to Parcel::enforceInterface(), reading the RPC
     // header with the strict mode policy mask and the interface name.
@@ -68,31 +79,33 @@ int hello_service_handler(struct binder_state *bs,
     // further (since we do no outbound RPCs anyway).
     strict_policy = bio_get_uint32(msg);
 
+
     switch(txn->code) {
-    	case HELLO_SVR_CMD_SAYHELLO Ôºö
-    		sayhello();
-    		return 0;
-    	case HELLO_SVR_CMD_SAYHELLO_TO Ôºö
-    		/* ‰ªémsgÈáåÂèñÂá∫Â≠óÁ¨¶‰∏≤ */
-    		s = bio_get_string16(msg, &len);
-    		if (s == NULL ) {
-    			return -1;
-    		}
-    		for (i = 0; i < len; i++) {
-    			name[i] = s[i];
-    		}
-    		name[i] = '\0';
-    		
-    		/* Â§ÑÁêÜ */
-    		i = sayhello_to(name);
-    		
-    		/* ÊääÁªìÊûúÊîæÂÖ•reply */
-    		bio_put_uint32(reply, i);
-    		
-    		break;
-		default:
-		    ALOGE("unknown code %d\n", txn->code);
-		    return -1;
+    case HELLO_SVR_CMD_SAYHELLO:
+		sayhello();
+        return 0;
+
+    case HELLO_SVR_CMD_SAYHELLO_TO:
+		/* ¥”msg¿Ô»°≥ˆ◊÷∑˚¥Æ */
+		s = bio_get_string16(msg, &len);
+		if (s == NULL) {
+			return -1;
+		}
+		for (i = 0; i < len; i++)
+			name[i] = s[i];
+		name[i] = '\0';
+
+		/* ¥¶¿Ì */
+		i = sayhello_to(name);
+
+		/* ∞—Ω·π˚∑≈»Îreply */
+		bio_put_uint32(reply, i);
+		
+        break;
+
+    default:
+        fprintf(stderr, "unknown code %d\n", txn->code);
+        return -1;
     }
 
     return 0;
@@ -104,7 +117,7 @@ int main(int argc, char **argv)
     struct binder_state *bs;
     uint32_t svcmgr = BINDER_SERVICE_MANAGER;
     uint32_t handle;
-    int ret;
+	int ret;
 
     bs = binder_open(128*1024);
     if (!bs) {
@@ -113,18 +126,16 @@ int main(int argc, char **argv)
     }
 
 	/* add service */
-	ret = svcmgr_publish(bs, svcmgr, "hello", 123);
-	if (!ret) {
-		 fprintf(stderr, "failed to publish hello service\n");
+	ret = svcmgr_publish(bs, svcmgr, "hello", (void *)123);
+    if (ret) {
+        fprintf(stderr, "failed to publish hello service\n");
         return -1;
-	}
-	
-	ret = svcmgr_publish(bs, svcmgr, "goobye", 123);
-	if (!ret) {
-		 fprintf(stderr, "failed to publish goobye service\n");
-        return -1;
-	}
-	
+    }
+	ret = svcmgr_publish(bs, svcmgr, "goodbye", (void *)124);
+    if (ret) {
+        fprintf(stderr, "failed to publish goodbye service\n");
+    }
+
 #if 0
 	while (1)
 	{
@@ -133,7 +144,7 @@ int main(int argc, char **argv)
 		/* reply */
 	}
 #endif
-	binder_loop(bs, hello_service_handler);
-    
+    binder_loop(bs, hello_service_handler);
+
     return 0;
 }
