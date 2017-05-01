@@ -56,9 +56,9 @@ int hello_service_handler(struct binder_state *bs,
                    struct binder_io *msg,
                    struct binder_io *reply)
 {
-	/* æ ¹æ®txn->codeçŸ¥é“è¦è°ƒç”¨å“ªä¸€ä¸ªå‡½æ•°
-	 * å¦‚æœéœ€è¦å‚æ•°, å¯ä»¥ä»msgå–å‡º
-	 * å¦‚æœè¦è¿”å›ç»“æœ, å¯ä»¥æŠŠç»“æœæ”¾å…¥reply
+	/* ¸ù¾İtxn->codeÖªµÀÒªµ÷ÓÃÄÄÒ»¸öº¯Êı
+	 * Èç¹ûĞèÒª²ÎÊı, ¿ÉÒÔ´ÓmsgÈ¡³ö
+	 * Èç¹ûÒª·µ»Ø½á¹û, ¿ÉÒÔ°Ñ½á¹û·ÅÈëreply
 	 */
 
 	/* sayhello
@@ -86,7 +86,7 @@ int hello_service_handler(struct binder_state *bs,
         return 0;
 
     case HELLO_SVR_CMD_SAYHELLO_TO:
-		/* ä»msgé‡Œå–å‡ºå­—ç¬¦ä¸² */
+		/* ´ÓmsgÀïÈ¡³ö×Ö·û´® */
 		s = bio_get_string16(msg, &len);
 		if (s == NULL) {
 			return -1;
@@ -95,10 +95,10 @@ int hello_service_handler(struct binder_state *bs,
 			name[i] = s[i];
 		name[i] = '\0';
 
-		/* å¤„ç† */
+		/* ´¦Àí */
 		i = sayhello_to(name);
 
-		/* æŠŠç»“æœæ”¾å…¥reply */
+		/* °Ñ½á¹û·ÅÈëreply */
 		bio_put_uint32(reply, i);
 		
         break;

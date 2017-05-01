@@ -48,17 +48,17 @@ void sayhello(void)
     unsigned iodata[512/4];
     struct binder_io msg, reply;
 
-	/* æ„é€ binder_io */
+	/* ¹¹Ôìbinder_io */
     bio_init(&msg, iodata, sizeof(iodata), 4);
     bio_put_uint32(&msg, 0);  // strict mode header
 
-	/* æ”¾å…¥å‚æ•° */
+	/* ·ÅÈë²ÎÊı */
 
-	/* è°ƒç”¨binder_call */
+	/* µ÷ÓÃbinder_call */
     if (binder_call(g_bs, &msg, &reply, g_handle, HELLO_SVR_CMD_SAYHELLO))
         return ;
 	
-	/* ä»replyä¸­è§£æå‡ºè¿”å›å€¼ */
+	/* ´ÓreplyÖĞ½âÎö³ö·µ»ØÖµ */
 
     binder_done(g_bs, &msg, &reply);
 	
@@ -70,18 +70,18 @@ int sayhello_to(char *name)
 	struct binder_io msg, reply;
 	int ret;
 
-	/* æ„é€ binder_io */
+	/* ¹¹Ôìbinder_io */
 	bio_init(&msg, iodata, sizeof(iodata), 4);
 	bio_put_uint32(&msg, 0);  // strict mode header
 
-	/* æ”¾å…¥å‚æ•° */
+	/* ·ÅÈë²ÎÊı */
     bio_put_string16_x(&msg, name);
 
-	/* è°ƒç”¨binder_call */
+	/* µ÷ÓÃbinder_call */
 	if (binder_call(g_bs, &msg, &reply, g_handle, HELLO_SVR_CMD_SAYHELLO_TO))
 		return 0;
 	
-	/* ä»replyä¸­è§£æå‡ºè¿”å›å€¼ */
+	/* ´ÓreplyÖĞ½âÎö³ö·µ»ØÖµ */
 	ret = bio_get_uint32(&reply);
 
 	binder_done(g_bs, &msg, &reply);
