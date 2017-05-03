@@ -6,5 +6,8 @@
 #define HELLO_SVR_CMD_SAYHELLO     0
 #define HELLO_SVR_CMD_SAYHELLO_TO  1
 
+#define GOODBYE_SVR_CMD_GOODBYE     0
+#define GOODBYE_SVR_CMD_GOODBYE_TO  1
+
 #endif // _TEST_SERVER_H
 
