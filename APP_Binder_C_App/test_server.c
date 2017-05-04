@@ -151,11 +151,11 @@ int goodbye_service_handler(struct binder_state *bs,
 
 
     switch(txn->code) {
-    case GOODBYE_SVR_CMD_GOODBYE:
+    case GOODBYE_SVR_CMD_SAYGOODBYE:
 		saygoodbye();
         return 0;
 
-    case GOODBYE_SVR_CMD_GOODBYE_TO:
+    case GOODBYE_SVR_CMD_SAYGOODBYE_TO:
 		/* ��msg��ȡ���ַ��� */
 		s = bio_get_string16(msg, &len);
 		if (s == NULL) {
@@ -182,15 +182,20 @@ int goodbye_service_handler(struct binder_state *bs,
 }
 
 int test_server_handler(struct binder_state *bs,
-                                          struct binder_transaction_data *txn,
-                                          struct binder_io *msg,
-                                          struct binder_io *reply) {
-    if (txn->target.ptr == 123) {
-        return hello_service_handler(bs, txn, msg, reply);
-    } else if (txn->target.ptr == 124) {
-        return goodbye_service_handler(bs, txn, msg, reply);
-    } else
-        return -1;
+          struct binder_transaction_data *txn,
+          struct binder_io *msg,
+          struct binder_io *reply) {
+    int (*handler)(struct binder_state *bs,
+          struct binder_transaction_data *txn,
+          struct binder_io *msg,
+          struct binder_io *reply);
+
+    handler = (int(*)(struct binder_state *bs,
+                    struct binder_transaction_data *txn,
+                    struct binder_io *msg,
+                    struct binder_io *reply))txn->target.ptr;
+
+    return handler(bs, txn, msg, reply);
 }
 
 int main(int argc, char **argv)
@@ -208,12 +213,12 @@ int main(int argc, char **argv)
     }
 
 	/* add service */
-	ret = svcmgr_publish(bs, svcmgr, "hello", (void *)123);
+	ret = svcmgr_publish(bs, svcmgr, "hello", hello_service_handler);
     if (ret) {
         fprintf(stderr, "failed to publish hello service\n");
         return -1;
     }
-	ret = svcmgr_publish(bs, svcmgr, "goodbye", (void *)124);
+	ret = svcmgr_publish(bs, svcmgr, "goodbye", goodbye_service_handler);
     if (ret) {
         fprintf(stderr, "failed to publish goodbye service\n");
     }

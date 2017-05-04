@@ -102,7 +102,7 @@ void saygoodbye() {
     /* ������� */
 
     /* ����binder_call */
-    if (binder_call(g_bs, &msg, &reply, g_goodbye_handle, GOODBYE_SVR_CMD_GOODBYE))
+    if (binder_call(g_bs, &msg, &reply, g_goodbye_handle, GOODBYE_SVR_CMD_SAYGOODBYE))
         return ;
 
     /* ��reply�н���������ֵ */
@@ -124,7 +124,7 @@ int saygoodbye_to(char *name)
     bio_put_string16_x(&msg, name);
 
 	/* ����binder_call */
-	if (binder_call(g_bs, &msg, &reply, g_goodbye_handle, GOODBYE_SVR_CMD_GOODBYE_TO))
+	if (binder_call(g_bs, &msg, &reply, g_goodbye_handle, GOODBYE_SVR_CMD_SAYGOODBYE_TO))
 		return 0;
 
 	/* ��reply�н���������ֵ */
@@ -177,7 +177,7 @@ int main(int argc, char **argv)
         return -1;
 	}
 	g_hello_handle = handle;
-	fprintf(stderr, "Handle for goodbye service = %d\n", g_hello_handle);
+	fprintf(stderr, "Handle for hello service = %d\n", g_hello_handle);
 
 	/* send data to server */
 	if (!strcmp(argv[1], "hello")) {
