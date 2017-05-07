@@ -74,6 +74,26 @@ const char *binder_cmd_name(uint32_t cmd)
     }
 }
 
+
+static void hexdump(void *_data, size_t len)
+{
+    unsigned char *data = _data;
+    size_t count;
+
+    for (count = 0; count < len; count++) {
+        if ((count & 15) == 0)
+            printk("%04zu:", count);
+        printk(" %02x %c", *data,
+                (*data < 32) || (*data > 126) ? '.' : *data);
+        data++;
+        if ((count & 15) == 15)
+            printk("\n");
+    }
+    if ((count & 15) != 0)
+        printk("\n");
+}
+
+
 static DEFINE_RT_MUTEX(binder_main_lock);
 static DEFINE_MUTEX(binder_deferred_lock);
 static DEFINE_MUTEX(binder_mmap_lock);
@@ -1577,16 +1597,14 @@ static void binder_transaction(struct binder_proc *proc,
 	e->debug_id = t->debug_id;
 
 	if (reply)
-		binder_debug(BINDER_DEBUG_TRANSACTION,
-			     "binder: %d:%d BC_REPLY %d -> %d:%d, "
+		printk("binder: %d:%d BC_REPLY %d -> %d:%d, "
 			     "data %p-%p size %zd-%zd\n",
 			     proc->pid, thread->pid, t->debug_id,
 			     target_proc->pid, target_thread->pid,
 			     tr->data.ptr.buffer, tr->data.ptr.offsets,
 			     tr->data_size, tr->offsets_size);
 	else
-		binder_debug(BINDER_DEBUG_TRANSACTION,
-			     "binder: %d:%d BC_TRANSACTION %d -> "
+		printk("binder: %d:%d BC_TRANSACTION %d -> "
 			     "%d - node %d, data %p-%p size %zd-%zd\n",
 			     proc->pid, thread->pid, t->debug_id,
 			     target_proc->pid, target_node->debug_id,
@@ -1634,6 +1652,12 @@ static void binder_transaction(struct binder_proc *proc,
 		return_error = BR_FAILED_REPLY;
 		goto err_copy_data_failed;
 	}
+
+	/* print data: */
+	printk("%s (%d, %d), %s , print data :\n", proc->tsk->comm, proc->pid, thread->pid, __FUNCTION__);		
+	hexdump(t->buffer->data, tr->data_size);
+
+	
 	if (copy_from_user(offp, tr->data.ptr.offsets, tr->offsets_size)) {
 		binder_user_error("binder: %d:%d got transaction with invalid "
 			"offsets ptr\n", proc->pid, thread->pid);
@@ -1886,9 +1910,9 @@ int binder_thread_write(struct binder_proc *proc, struct binder_thread *thread,
 			thread->stats.bc[_IOC_NR(cmd)]++;
 		}
 
-		/* print info: proc'name, proc'id, thread id, cmd'name */
-		printk(“%s (%d, %d), %s : %s\n”, proc->task->comm, proc->pid, thread->pid, __FUNCTON__, binder_cmd_name(cmd));
-
+		/* print info: proc'name, proc id, thread id, cmd'name */
+		printk("%s (%d, %d), %s : %s\n", proc->tsk->comm, proc->pid, thread->pid, __FUNCTION__, binder_cmd_name(cmd));		
+		
 		switch (cmd) {
 		case BC_INCREFS:
 		case BC_ACQUIRE:
@@ -2293,6 +2317,10 @@ static int binder_thread_read(struct binder_proc *proc,
 	int wait_for_proc_work;
 
 	if (*consumed == 0) {
+
+		/* print info: proc'name, proc id, thread id, cmd'name */
+		printk("%s (%d, %d), %s : %s\n", proc->tsk->comm, proc->pid, thread->pid, __FUNCTION__, binder_cmd_name(BR_NOOP));		
+
 		if (put_user(BR_NOOP, (uint32_t __user *)ptr))
 			return -EFAULT;
 		ptr += sizeof(uint32_t);
@@ -2383,6 +2411,10 @@ retry:
 		} break;
 		case BINDER_WORK_TRANSACTION_COMPLETE: {
 			cmd = BR_TRANSACTION_COMPLETE;
+
+			/* print info: proc'name, proc id, thread id, cmd'name */
+			printk("%s (%d, %d), %s : %s\n", proc->tsk->comm, proc->pid, thread->pid, __FUNCTION__, binder_cmd_name(cmd));		
+
 			if (put_user(cmd, (uint32_t __user *)ptr))
 				return -EFAULT;
 			ptr += sizeof(uint32_t);
@@ -2424,6 +2456,8 @@ retry:
 				node->has_weak_ref = 0;
 			}
 			if (cmd != BR_NOOP) {
+				/* print info: proc'name, proc id, thread id, cmd'name */
+				printk("%s (%d, %d), %s : %s\n", proc->tsk->comm, proc->pid, thread->pid, __FUNCTION__, binder_cmd_name(cmd));		
 				if (put_user(cmd, (uint32_t __user *)ptr))
 					return -EFAULT;
 				ptr += sizeof(uint32_t);
@@ -2467,6 +2501,9 @@ retry:
 				cmd = BR_CLEAR_DEATH_NOTIFICATION_DONE;
 			else
 				cmd = BR_DEAD_BINDER;
+
+			/* print info: proc'name, proc id, thread id, cmd'name */
+			printk("%s (%d, %d), %s : %s\n", proc->tsk->comm, proc->pid, thread->pid, __FUNCTION__, binder_cmd_name(cmd));		
 			if (put_user(cmd, (uint32_t __user *)ptr))
 				return -EFAULT;
 			ptr += sizeof(uint32_t);
@@ -2533,6 +2570,15 @@ retry:
 					ALIGN(t->buffer->data_size,
 					    sizeof(void *));
 
+		/* print info: proc'name, proc id, thread id, cmd'name */
+		printk("%s (%d, %d), %s : %s\n", proc->tsk->comm, proc->pid, thread->pid, __FUNCTION__, binder_cmd_name(cmd));		
+
+		
+		/* print data: */
+		printk("%s (%d, %d), %s , print data :\n", proc->tsk->comm, proc->pid, thread->pid, __FUNCTION__);		
+		hexdump(t->buffer->data, tr.data_size);
+
+		
 		if (put_user(cmd, (uint32_t __user *)ptr))
 			return -EFAULT;
 		ptr += sizeof(uint32_t);
@@ -2578,6 +2624,8 @@ done:
 		binder_debug(BINDER_DEBUG_THREADS,
 			     "binder: %d:%d BR_SPAWN_LOOPER\n",
 			     proc->pid, thread->pid);
+		/* print info: proc'name, proc id, thread id, cmd'name */
+		printk("%s (%d, %d), %s : %s\n", proc->tsk->comm, proc->pid, thread->pid, __FUNCTION__, binder_cmd_name(BR_SPAWN_LOOPER));		
 		if (put_user(BR_SPAWN_LOOPER, (uint32_t __user *)buffer))
 			return -EFAULT;
 	}
