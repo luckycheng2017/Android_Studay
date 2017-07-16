@@ -27,4 +27,4 @@ public:
     }
 };
 
-IMPLEMENT_META_INTERFACE(MediaPlayerService, "android.media.IHelloService");
+IMPLEMENT_META_INTERFACE(HelloService, "android.media.IHelloService");
