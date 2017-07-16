@@ -4,7 +4,7 @@ class BpHelloService: public BpInterface<IHelloService>
 {
 public:
     BpHelloService(const sp<IBinder>& impl)
-        : BpInterface<IMediaPlayerService>(impl)
+        : BpInterface<IHelloService>(impl)
     {
     }
 
