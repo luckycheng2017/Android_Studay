@@ -10,6 +10,8 @@
 #include <cutils/properties.h>
 #include <utils/Log.h>
 
+#include "IHelloService.h"
+
 using namespace android;
 
 int main(int argc, char **argv) {

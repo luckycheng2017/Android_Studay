@@ -10,10 +10,11 @@
 #include <cutils/properties.h>
 #include <utils/Log.h>
 
+#include "IHelloService.h"
 
 using namespace android;
 
-void main(void) {
+int main(void) {
     sp<ProcessState> proc(ProcessState::self());
 
     sp<IServiceManager> sm = defaultServiceManager();
@@ -22,4 +23,6 @@ void main(void) {
 
     ProcessState::self()->startThreadPool();
     IPCThreadState::self()->joinThreadPool();
+
+	return 0;
 }

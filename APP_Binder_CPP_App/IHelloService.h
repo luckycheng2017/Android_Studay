@@ -1,5 +1,6 @@
-#ifndef ANDROID_IHELLOSERVICE_H
-#define ANDROID_IHELLOSERVICE_H
+
+#ifndef ANDROID_IHELLOERVICE_H
+#define ANDROID_IHELLOERVICE_H
 
 #include <utils/Errors.h>  // for status_t
 #include <utils/KeyedVector.h>
@@ -7,10 +8,9 @@
 #include <utils/String8.h>
 #include <binder/IInterface.h>
 #include <binder/Parcel.h>
-#include <system/audio.h>
 
-#define HELLO_SVR_CMD_SAYHELLO      0
-#define HELLO_SVR_CMD_SAYHELLOTO    1
+#define HELLO_SVR_CMD_SAYHELLO     0
+#define HELLO_SVR_CMD_SAYHELLO_TO  1
 
 namespace android {
 
@@ -23,7 +23,6 @@ public:
     virtual int sayhello_to(const char *name) = 0;
 };
 
-// ----------------------------------------------------------------------------
 
 class BnHelloService: public BnInterface<IHelloService>
 {

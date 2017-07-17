@@ -1,15 +1,8 @@
-#include "IHelloService.h"
 
 #define LOG_TAG "HelloService"
 
-#include <stdint.h>
-#include <sys/types.h>
+#include "IHelloService.h"
 
-#include <binder/Parcel.h>
-#include <binder/IMemory.h>
-
-#include <utils/Errors.h>  // for status_t
-#include <utils/String8.h>
 
 namespace android {
 
@@ -22,7 +15,7 @@ status_t BnHelloService::onTransact(
             sayhello();
             return NO_ERROR;
         } break;
-        case HELLO_SVR_CMD_SAYHELLOTO: {
+        case HELLO_SVR_CMD_SAYHELLO_TO: {
             int32_t policy = data.readInt32();
             String16 name16 = data.readString16();
             String8 name8(name16);
@@ -38,9 +31,9 @@ status_t BnHelloService::onTransact(
     }
 }
 
-int BnHelloService::sayhello(const char *name) {
-    static int cnt = 0;
-    ALOGI("say hello : %d\n", cnt++);
+void BnHelloService::sayhello(void) {
+	static int cnt = 0;
+	ALOGI("say hello : %d\n", cnt++);
 }
 
 int BnHelloService::sayhello_to(const char *name) {
