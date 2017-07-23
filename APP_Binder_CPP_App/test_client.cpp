@@ -1,4 +1,4 @@
-#define LOG_TAG "HelloService"
+#define LOG_TAG "TestService"
 //#define LOG_NDEBUG 0
 
 #include <fcntl.h>
@@ -11,6 +11,7 @@
 #include <utils/Log.h>
 
 #include "IHelloService.h"
+#include "IGoodbyService.h"
 
 using namespace android;
 
@@ -28,21 +29,40 @@ int main(int argc, char **argv) {
 
     sp<IServiceManager> sm = defaultServiceManager();
 
-    sp<IBinder> binder = sm->getService(String16("hello"));
+    if (strcmp(argv[1], "hello") == 0) {
+        sp<IBinder> binder = sm->getService(String16("hello"));
 
-    if (binder == 0) {
-        ALOGI("can't get hello service\n");
-        return -1;
-    }
+        if (binder == 0) {
+            ALOGI("can't get hello service\n");
+            return -1;
+        }
 
-    sp<IHelloService> service = interface_cast<IHelloService> (binder);
+        sp<IHelloService> service = interface_cast<IHelloService> (binder);
 
-    if (argc < 3) {
-        service->sayhello();
-        ALOGI("client call sayhello");
+        if (argc < 3) {
+            service->sayhello();
+            ALOGI("client call sayhello");
+        } else {
+            cnt = service->sayhello_to(argv[2]);
+            ALOGI("client call sayhello_to, cnt = %d\n", cnt);
+        }
     } else {
-        cnt = service->sayhello_to(argv[2]);
-        ALOGI("client call sayhello_to, cnt = %d", cnt);
+        sp<IBinder> binder = sm->getService(String16("goodbye"));
+
+        if (binder == 0) {
+            ALOGI("can't get goodbye service\n");
+            return -1;
+        }
+
+        sp<IGoodbyeService> service = interface_cast<IGoodbyeService> (binder);
+
+        if (argc < 3) {
+            service->saygoodbye();
+            ALOGI("client call saygoodbye");
+        } else {
+            cnt = service->saygoodbye_to(argv[2]);
+            ALOGI("client call saygoodbye_to, cnt = %d\n", cnt);
+        }
     }
 
     return 0;
