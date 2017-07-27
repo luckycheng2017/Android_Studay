@@ -39,6 +39,33 @@ public class TestClient {
                     e.printStackTrace();
                 }
             }
+        } else if (args[0].equals("goodbye")) {
+            IBinder binder = ServiceManager.getService("goodbye");
+            if (binder == null) {
+                System.out.println("can not get goodbye service");
+                Slog.i(TAG, "can not get goodbye service");
+                return;
+            }
+
+            IGoodbyeService svr = IGoodbyeService.Stub.asInterface(binder);
+
+            if (args.length == 1) {
+                try {
+                    svr.saygoodbye();
+                    System.out.println("call goodbye");
+                    Slog.i(TAG, "call goodbye");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    int cnt = svr.saygoodbye_to(args[1]);
+                    System.out.println("call goodbye_to " + args[1]);
+                    Slog.i(TAG, "call goodbye_to " + args[1] + " : cnt = " + cnt);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
