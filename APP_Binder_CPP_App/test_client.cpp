@@ -11,7 +11,7 @@
 #include <utils/Log.h>
 
 #include "IHelloService.h"
-#include "IGoodbyService.h"
+#include "IGoodbyeService.h"
 
 using namespace android;
 
