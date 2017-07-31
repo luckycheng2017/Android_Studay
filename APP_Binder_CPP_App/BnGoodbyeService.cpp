@@ -1,5 +1,5 @@
 
-/* ²Î¿¼: frameworks\av\media\libmedia\IMediaPlayerService.cpp */
+/* ï¿½Î¿ï¿½: frameworks\av\media\libmedia\IMediaPlayerService.cpp */
 
 #define LOG_TAG "GoodbyeService"
 
@@ -13,24 +13,27 @@ status_t BnGoodbyeService::onTransact( uint32_t code,
                                 Parcel* reply,
                                 uint32_t flags)
 {
-	/* ½âÎöÊý¾Ý,µ÷ÓÃsaygoodbye/saygoodbye_to */
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½saygoodbye/saygoodbye_to */
 
     switch (code) {
         case GOODBYE_SVR_CMD_SAYGOODBYE: {
 			saygoodbye();
+			reply->writeInt32(0);
             return NO_ERROR;
         } break;
 		
         case GOODBYE_SVR_CMD_SAYGOODBYE_TO: {
 
-			/* ´ÓdataÖÐÈ¡³ö²ÎÊý */
+			/* ï¿½ï¿½dataï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 			int32_t policy =  data.readInt32();
+			String16 name16_tmp = data.readString16();
 			String16 name16 = data.readString16();
 			String8 name8(name16);
 
 			int cnt = saygoodbye_to(name8.string());
 
-			/* °Ñ·µ»ØÖµÐ´Èëreply´«»ØÈ¥ */
+			/* ï¿½Ñ·ï¿½ï¿½ï¿½ÖµÐ´ï¿½ï¿½replyï¿½ï¿½ï¿½ï¿½È¥ */
+			reply->writeInt32(0);
 			reply->writeInt32(cnt);
 			
             return NO_ERROR;
@@ -43,14 +46,14 @@ status_t BnGoodbyeService::onTransact( uint32_t code,
 void BnGoodbyeService::saygoodbye(void)
 {
 	static int cnt = 0;
-	ALOGI("say goodbye : %d\n", cnt++);
+	ALOGI("say goodbye : %d\n", ++cnt);
 
 }
 
 int BnGoodbyeService::saygoodbye_to(const char *name)
 {
 	static int cnt = 0;
-	ALOGI("say goodbye to %s : %d\n", name, cnt++);
+	ALOGI("say goodbye to %s : %d\n", name, ++cnt);
 	return cnt;
 }
 

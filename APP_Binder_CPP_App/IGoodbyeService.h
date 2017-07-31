@@ -1,5 +1,5 @@
 
-/* ²Î¿¼: frameworks\av\include\media\IMediaPlayerService.h */
+/* ï¿½Î¿ï¿½: frameworks\av\include\media\IMediaPlayerService.h */
 
 #ifndef ANDROID_IGOODBYEERVICE_H
 #define ANDROID_IGOODBYEERVICE_H
@@ -11,8 +11,8 @@
 #include <binder/IInterface.h>
 #include <binder/Parcel.h>
 
-#define GOODBYE_SVR_CMD_SAYGOODBYE     0
-#define GOODBYE_SVR_CMD_SAYGOODBYE_TO  1
+#define GOODBYE_SVR_CMD_SAYGOODBYE     1
+#define GOODBYE_SVR_CMD_SAYGOODBYE_TO  2
 
 
 namespace android {

@@ -1,5 +1,5 @@
 
-/* ²Î¿¼: frameworks\av\media\libmedia\IMediaPlayerService.cpp */
+/* ï¿½Î¿ï¿½: frameworks\av\media\libmedia\IMediaPlayerService.cpp */
 
 #include "IGoodbyeService.h"
 
@@ -15,25 +15,32 @@ public:
 
 	void saygoodbye(void)
 	{
-		/* ¹¹Ôì/·¢ËÍÊý¾Ý */
+		/* ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
         Parcel data, reply;
         data.writeInt32(0);
+        data.writeString16(String16("IGoodbyeService"));
 
         remote()->transact(GOODBYE_SVR_CMD_SAYGOODBYE, data, &reply);
 	}
 	
 	int saygoodbye_to(const char *name)
 	{
-		/* ¹¹Ôì/·¢ËÍÊý¾Ý */
+		/* ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
         Parcel data, reply;
+        int exception;
 
         data.writeInt32(0);
+        data.writeString16(String16("IGoodbyeService"));
         data.writeString16(String16(name));
 
         remote()->transact(GOODBYE_SVR_CMD_SAYGOODBYE_TO, data, &reply);
 
-		return reply.readInt32();
+        exception = reply.readInt32();
+        if (exception)
+            return -1;
+        else
+		    return reply.readInt32();
 	}
 
 };
