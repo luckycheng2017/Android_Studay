@@ -21,6 +21,7 @@ int read_process_inotify_fd(int fd) {
     }
 
     while (res >= (int) sizeof(*event)) {
+        event = (struct inotify_event *)(event_buf + event_pos);
         if (event->len) {
             if (event->mask & IN_CREATE) {
                 printf("create file: %s\n", event->name);
@@ -52,4 +53,5 @@ int main(int argc, char **argv) {
     while (1) {
         read_process_inotify_fd(mINotifyFd);
     }
+	return 0;
 }
