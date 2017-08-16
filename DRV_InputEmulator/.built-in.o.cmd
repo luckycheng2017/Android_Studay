@@ -1,0 +1,1 @@
+cmd_/home/wang/AndroidStudioProjects/DRV_InputEmulator/built-in.o :=  rm -f /home/wang/AndroidStudioProjects/DRV_InputEmulator/built-in.o; arm-linux-ar rcsD /home/wang/AndroidStudioProjects/DRV_InputEmulator/built-in.o

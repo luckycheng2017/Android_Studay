@@ -1,0 +1,1 @@
+cmd_/home/wang/AndroidStudioProjects/DRV_InputEmulator/InputEmulator.ko := arm-linux-ld -EL -r  -T /home/wang/Download/linux-3.0.86/scripts/module-common.lds --build-id  -o /home/wang/AndroidStudioProjects/DRV_InputEmulator/InputEmulator.ko /home/wang/AndroidStudioProjects/DRV_InputEmulator/InputEmulator.o /home/wang/AndroidStudioProjects/DRV_InputEmulator/InputEmulator.mod.o
