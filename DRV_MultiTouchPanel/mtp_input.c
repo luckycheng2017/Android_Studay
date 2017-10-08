@@ -145,6 +145,7 @@ static int __devinit mtp_probe(struct i2c_client *client, const struct i2c_devic
 	
 	set_bit(EV_SYN, ts_dev->evbit);
 	set_bit(EV_ABS, ts_dev->evbit);
+	set_bit(INPUT_PROP_DIRECT, ts_dev->propbit);
 	
 	set_bit(ABS_MT_TRACKING_ID, ts_dev->absbit);
 	set_bit(ABS_MT_POSITION_X, ts_dev->absbit);
