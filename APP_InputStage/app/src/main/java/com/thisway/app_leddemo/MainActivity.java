@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.view.View;
@@ -58,8 +59,19 @@ public class MainActivity extends Activity {
     class MyButtonListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            View decorView = getWindow().getDecorView();
-            printViewHierarchy(decorView, 0, -1);
+//            View decorView = getWindow().getDecorView();
+//            printViewHierarchy(decorView, 0, -1);
+            Log.d(TAG, "**** MyButtonListener onClick call strace ****");
+            Log.d(TAG, Log.getStackTraceString(new Throwable()));
+        }
+    }
+
+    class MyButtonTouchListener implements View.OnTouchListener {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            Log.d(TAG, "**** MyButtonTouchListener onTouch call strace ****");
+            Log.d(TAG, Log.getStackTraceString(new Throwable()));
+            return false;
         }
     }
 
@@ -154,8 +166,6 @@ public class MainActivity extends Activity {
         checkBoxLed3 = (CheckBox) findViewById(R.id.LED3);
         checkBoxLed4 = (CheckBox) findViewById(R.id.LED4);
 
-        button.setOnClickListener(new MyButtonListener());
-
         View myEditText = (View) findViewById(R.id.myEditText);
 
         myEditText.setOnKeyListener(new View.OnKeyListener() {
@@ -167,6 +177,7 @@ public class MainActivity extends Activity {
         });
 
         button.setOnClickListener(new MyButtonListener());
+        button.setOnTouchListener(new MyButtonTouchListener());
 /*
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
