@@ -26,12 +26,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".zxing.activity.CaptureActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar">
+                  android:screenOrientation="portrait"
+                  android:theme="@android:style/Theme.Black.NoTitleBar">
         </activity>
         <activity android:name=".zxing.activity.ResultActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar">
+                  android:screenOrientation="portrait"
+                  android:theme="@android:style/Theme.Black.NoTitleBar">
         </activity>
     </application>
 
