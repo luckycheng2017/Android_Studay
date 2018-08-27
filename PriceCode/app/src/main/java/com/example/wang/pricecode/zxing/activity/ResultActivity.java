@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
@@ -17,6 +18,9 @@ public class ResultActivity extends Activity {
 	private ImageView mResultImage;
 	private TextView mResultText;
 
+	private Button mAddButton;
+	private Button mDeleteButton;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,6 +30,9 @@ public class ResultActivity extends Activity {
 
 		mResultImage = (ImageView) findViewById(R.id.result_image);
 		mResultText = (TextView) findViewById(R.id.result_text);
+
+		mAddButton = (Button) findViewById(R.id.button_add);
+		mDeleteButton = (Button) findViewById(R.id.button_delete);
 
 		if (null != extras) {
 			int width = extras.getInt("width");
