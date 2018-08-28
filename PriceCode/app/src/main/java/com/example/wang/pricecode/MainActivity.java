@@ -16,10 +16,15 @@ public class MainActivity extends AppCompatActivity {
 
     private Button MyScanButton = null;
 
+    private MyDatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbHelper = new MyDatabaseHelper(this, "priceCode.db", null, 1);
+        dbHelper.getWritableDatabase();
 
         MyScanButton = (Button) findViewById(R.id.scan_button);
 
