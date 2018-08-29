@@ -1,15 +1,18 @@
 package com.example.wang.pricecode.zxing.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import com.example.wang.pricecode.EditActivity;
 import com.example.wang.pricecode.R;
 import com.example.wang.pricecode.zxing.decode.DecodeThread;
 
@@ -26,12 +29,24 @@ public class ResultActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result);
 
-		Bundle extras = getIntent().getExtras();
+		final Bundle extras = getIntent().getExtras();
 
 		mResultImage = (ImageView) findViewById(R.id.result_image);
 		mResultText = (TextView) findViewById(R.id.result_text);
 
 		mAddButton = (Button) findViewById(R.id.button_add);
+		mAddButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+                if (extras != null) {
+                    String result = extras.getString("result");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("result", result);
+                    startActivity(new Intent(ResultActivity.this, EditActivity.class).putExtras(bundle));
+                }
+			}
+		});
+
 		mDeleteButton = (Button) findViewById(R.id.button_delete);
 
 		if (null != extras) {
