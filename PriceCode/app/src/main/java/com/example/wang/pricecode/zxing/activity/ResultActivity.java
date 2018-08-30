@@ -72,22 +72,26 @@ public class ResultActivity extends Activity {
 			mResultImage.setLayoutParams(lps);
 
 			String result = extras.getString("result");
-			mResultText.setText(result);
+			mResultText.setText("序列码：" + result);
+
+			mPriceResult.setText("价格：¥");
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-            float mPrice;
-            Cursor mCursor = db.rawQuery("select * from priceCode where SequenceCode = " + result, null);
-//			  Log.d("wang", "mCursor = " + mCursor);
-            if (mCursor != null) {
-//                mPrice = mCursor.getFloat(mCursor.getColumnIndex("price"));
-//                mPriceResult.setText(String.valueOf(mPrice));
-//                Log.d("wang", "mPrice = " + mPrice);
-				Log.d("wang", "mCursor = != null");
-            } else {
-                mPriceResult.setText("");
-                Log.d("wang", "mCursor == null");
-            }
+			Cursor cursor = db.query("priceCode", null, null, null, null, null, null);
+			if (cursor.getCount() != 0) {
+				if (cursor.moveToFirst()) {
+					do {
+						int sequenceCode = cursor.getInt(cursor.getColumnIndex("SequenceCode"));
+						float price = cursor.getFloat(cursor.getColumnIndex("price"));
+						if (result.equals(String.valueOf(sequenceCode))) {
+							mPriceResult.setText("价格：¥" + String.valueOf(price));
+							mAddButton.setEnabled(false);
+						} else {
+							mAddButton.setEnabled(true);
+						}
+					} while (cursor.moveToNext());
+				}
+			}
 
 			Bitmap barcode = null;
 			byte[] compressedBitmap = extras.getByteArray(DecodeThread.BARCODE_BITMAP);

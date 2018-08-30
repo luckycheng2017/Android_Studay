@@ -11,6 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scan_button"
-        android:text="Scan"/>
+        android:text="扫描"/>
 
 </android.support.constraint.ConstraintLayout>
