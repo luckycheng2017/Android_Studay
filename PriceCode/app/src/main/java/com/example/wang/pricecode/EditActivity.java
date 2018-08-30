@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by wang on 18-8-29.
@@ -41,6 +42,7 @@ public class EditActivity extends AppCompatActivity {
                     values.put("price", Float.valueOf(mEditText.getText().toString()));
                     db.insert("priceCode", null, values);
                     values.clear();
+                    Toast.makeText(EditActivity.this, "save succeeded", Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -2,9 +2,12 @@ package com.example.wang.pricecode.zxing.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +16,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.example.wang.pricecode.EditActivity;
+import com.example.wang.pricecode.MyDatabaseHelper;
 import com.example.wang.pricecode.R;
 import com.example.wang.pricecode.zxing.decode.DecodeThread;
 
@@ -23,6 +27,9 @@ public class ResultActivity extends Activity {
 
 	private Button mAddButton;
 	private Button mDeleteButton;
+    private TextView mPriceResult;
+
+    private MyDatabaseHelper dbHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,10 @@ public class ResultActivity extends Activity {
 
 		mResultImage = (ImageView) findViewById(R.id.result_image);
 		mResultText = (TextView) findViewById(R.id.result_text);
+
+        mPriceResult = (TextView) findViewById(R.id.result_price);
+
+        dbHelper = new MyDatabaseHelper(this, "priceCode.db", null, 1);
 
 		mAddButton = (Button) findViewById(R.id.button_add);
 		mAddButton.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +73,21 @@ public class ResultActivity extends Activity {
 
 			String result = extras.getString("result");
 			mResultText.setText(result);
+
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            float mPrice;
+            Cursor mCursor = db.rawQuery("select * from priceCode where SequenceCode = " + result, null);
+//			  Log.d("wang", "mCursor = " + mCursor);
+            if (mCursor != null) {
+//                mPrice = mCursor.getFloat(mCursor.getColumnIndex("price"));
+//                mPriceResult.setText(String.valueOf(mPrice));
+//                Log.d("wang", "mPrice = " + mPrice);
+				Log.d("wang", "mCursor = != null");
+            } else {
+                mPriceResult.setText("");
+                Log.d("wang", "mCursor == null");
+            }
 
 			Bitmap barcode = null;
 			byte[] compressedBitmap = extras.getByteArray(DecodeThread.BARCODE_BITMAP);
