@@ -26,6 +26,7 @@ public class ResultActivity extends Activity {
 	private TextView mResultText;
 
 	private Button mAddButton;
+    private Button mModifyButton;
 	private Button mDeleteButton;
     private TextView mPriceResult;
 
@@ -53,10 +54,25 @@ public class ResultActivity extends Activity {
                     String result = extras.getString("result");
                     Bundle bundle = new Bundle();
                     bundle.putString("result", result);
+                    bundle.putBoolean("update", false);
                     startActivity(new Intent(ResultActivity.this, EditActivity.class).putExtras(bundle));
                 }
 			}
 		});
+
+        mModifyButton = (Button) findViewById(R.id.button_modify);
+        mModifyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (extras != null) {
+                    String result = extras.getString("result");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("result", result);
+                    bundle.putBoolean("update", true);
+                    startActivity(new Intent(ResultActivity.this, EditActivity.class).putExtras(bundle));
+                }
+            }
+        });
 
 		mDeleteButton = (Button) findViewById(R.id.button_delete);
 
@@ -86,11 +102,15 @@ public class ResultActivity extends Activity {
 						if (result.equals(String.valueOf(sequenceCode))) {
 							mPriceResult.setText("价格：¥" + String.valueOf(price));
 							mAddButton.setEnabled(false);
+							mModifyButton.setEnabled(true);
 						} else {
 							mAddButton.setEnabled(true);
+							mModifyButton.setEnabled(false);
 						}
 					} while (cursor.moveToNext());
 				}
+			} else {
+				mModifyButton.setEnabled(false);
 			}
 
 			Bitmap barcode = null;

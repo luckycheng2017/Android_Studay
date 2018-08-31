@@ -36,13 +36,21 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (extras != null) {
-                    String result = extras.getString("result");
-                    SQLiteDatabase db = dbHelper.getWritableDatabase();
-                    ContentValues values = new ContentValues();
-                    values.put("SequenceCode", Integer.valueOf(result));
-                    values.put("price", Float.valueOf(mEditText.getText().toString()));
-                    db.insert("priceCode", null, values);
-                    values.clear();
+                    if (extras.getBoolean("update") == false) {
+                        String result = extras.getString("result");
+                        SQLiteDatabase db = dbHelper.getWritableDatabase();
+                        ContentValues values = new ContentValues();
+                        values.put("SequenceCode", Integer.valueOf(result));
+                        values.put("price", Float.valueOf(mEditText.getText().toString()));
+                        db.insert("priceCode", null, values);
+                        values.clear();
+                    } else {
+                        String result = extras.getString("result");
+                        SQLiteDatabase db = dbHelper.getWritableDatabase();
+                        ContentValues values = new ContentValues();
+                        values.put("price", Float.valueOf(mEditText.getText().toString()));
+                        db.update("priceCode", values, "SequenceCode = ?", new String[]{ result });
+                    }
                     Toast.makeText(EditActivity.this, "保存成功", Toast.LENGTH_LONG).show();
                 }
             }
