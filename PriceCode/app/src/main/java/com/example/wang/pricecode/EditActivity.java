@@ -40,7 +40,7 @@ public class EditActivity extends AppCompatActivity {
                         String result = extras.getString("result");
                         SQLiteDatabase db = dbHelper.getWritableDatabase();
                         ContentValues values = new ContentValues();
-                        values.put("SequenceCode", Integer.valueOf(result));
+                        values.put("SequenceCode", result);
                         values.put("price", Float.valueOf(mEditText.getText().toString()));
                         db.insert("priceCode", null, values);
                         values.clear();

@@ -97,9 +97,9 @@ public class ResultActivity extends Activity {
 			if (cursor.getCount() != 0) {
 				if (cursor.moveToFirst()) {
 					do {
-						int sequenceCode = cursor.getInt(cursor.getColumnIndex("SequenceCode"));
+						String sequenceCode = cursor.getString(cursor.getColumnIndex("SequenceCode"));
 						float price = cursor.getFloat(cursor.getColumnIndex("price"));
-						if (result.equals(String.valueOf(sequenceCode))) {
+						if (result.equals(sequenceCode)) {
 							mPriceResult.setText("价格：¥" + String.valueOf(price));
 							mAddButton.setEnabled(false);
 							mModifyButton.setEnabled(true);

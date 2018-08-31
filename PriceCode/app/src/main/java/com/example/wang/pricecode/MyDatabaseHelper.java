@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String CREATE_PRICECODE = "create table priceCode (" +
-            "SequenceCode integer primary key," +
+            "SequenceCode varchar(50) primary key," +
             "price real)";
 
     private Context mContext;
