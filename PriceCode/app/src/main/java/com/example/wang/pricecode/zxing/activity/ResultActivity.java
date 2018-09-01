@@ -103,6 +103,7 @@ public class ResultActivity extends Activity {
 							mPriceResult.setText("价格：¥" + String.valueOf(price));
 							mAddButton.setEnabled(false);
 							mModifyButton.setEnabled(true);
+                            break;
 						} else {
 							mAddButton.setEnabled(true);
 							mModifyButton.setEnabled(false);
