@@ -4,10 +4,10 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 refreshStocks();
             }
-        }, 0, 10000); // 10 seconds
+        }, 0, 1000); // 1 seconds
     }
 
     @Override
@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
         public String s1_, s2_, s3_, s4_, s5_;
         public String sp1_, sp2_, sp3_, sp4_, sp5_;
         public String time_;
+        public int statu; // 0:正常, 1:跌
     }
 
     public TreeMap<String, Stock> sinaResponseToStocks(String response){
@@ -486,6 +487,18 @@ public class MainActivity extends AppCompatActivity {
             }
             if(Double.parseDouble(stock.s5_ )>= StockLargeTrade_) {
                 text += sSell + "5:" + stock.s5_ + ",";
+            }
+            Double dNow = Double.parseDouble(stock.now_);
+            Double dYesterday = Double.parseDouble(stock.yesterday_);
+            Double dIncrease = dNow - dYesterday;
+            Double dPercent = dIncrease / dYesterday * 100;
+            if(dPercent <= -5.5 && stock.statu == 0) {
+                stock.statu = 1;
+                stockMap.put(stock.id_, stock);
+                text += getResources().getString(R.string.stock_increase_percent_title) + ":"
+                        + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + stock.b1_;
+            } else if(dPercent > -5.5 && stock.statu == 1) {
+                stock.statu = 0;
             }
             if(text.length() > 0)
                 sendNotifation(Integer.parseInt(sid), stock.name_, text);
