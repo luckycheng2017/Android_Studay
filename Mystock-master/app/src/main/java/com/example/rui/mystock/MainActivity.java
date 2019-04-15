@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private final static String ChuangIndex = "sz399006";
     private final static String StockIdsKey_ = "StockIds";
     private final static int StockLargeTrade_ = 1000000;
+
+    private static TreeMap<String, Stock> stockMap = new TreeMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,14 +151,14 @@ public class MainActivity extends AppCompatActivity {
         public String s1_, s2_, s3_, s4_, s5_;
         public String sp1_, sp2_, sp3_, sp4_, sp5_;
         public String time_;
-        public int statu; // 0:正常, 1:跌
+        public int status; // 0:正常, 1:跌
+        public String b1Prev_; // 上一次买1的值
     }
 
     public TreeMap<String, Stock> sinaResponseToStocks(String response){
         response = response.replaceAll("\n", "");
         String[] stocks = response.split(";");
 
-        TreeMap<String, Stock> stockMap = new TreeMap();
         for(String stock : stocks) {
             String[] leftRight = stock.split("=");
             if (leftRight.length < 2)
@@ -173,6 +174,10 @@ public class MainActivity extends AppCompatActivity {
 
             Stock stockNow = new Stock();
             stockNow.id_ = left.split("_")[2];
+            if(stockMap.containsKey(stockNow.id_)) {
+                stockNow.status = stockMap.get(stockNow.id_).status;
+                stockNow.b1Prev_ = stockMap.get(stockNow.id_).b1_;
+            }
 
             String[] values = right.split(",");
             stockNow.name_ = values[0];
@@ -430,6 +435,29 @@ public class MainActivity extends AppCompatActivity {
                 now.setTextColor(color);
                 percent.setTextColor(color);
                 increaseValue.setTextColor(color);
+
+                String sid = stock.id_;
+                String text = "";
+                String sBuy = getResources().getString(R.string.stock_buy);
+                if(dPercent <= -4.5 && stock.status == 0) {
+                    stock.status = 1;
+                    stockMap.put(stock.id_, stock);
+                    text += getResources().getString(R.string.stock_increase_percent_title) + ":"
+                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + stock.b1_;
+                } else if(dPercent > -4.5 && stock.status == 1) {
+                    stock.status = 0;
+                    stockMap.put(stock.id_, stock);
+                    text += getResources().getString(R.string.stock_increase_percent_title) + ":"
+                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + stock.b1_;
+                }
+                if(stock.b1Prev_ != null) {
+                    if(Double.parseDouble(stock.b1Prev_) - Double.parseDouble(stock.b1_) > 800000) {
+                        text += getResources().getString(R.string.stock_increase_percent_title) + ":"
+                                + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + stock.b1_;
+                    }
+                }
+                if(text.length() > 0)
+                    sendNotifation(Integer.parseInt(sid), stock.name_, text);
             }
             row.addView(percent);
             row.addView(increaseValue);
@@ -487,18 +515,6 @@ public class MainActivity extends AppCompatActivity {
             }
             if(Double.parseDouble(stock.s5_ )>= StockLargeTrade_) {
                 text += sSell + "5:" + stock.s5_ + ",";
-            }
-            Double dNow = Double.parseDouble(stock.now_);
-            Double dYesterday = Double.parseDouble(stock.yesterday_);
-            Double dIncrease = dNow - dYesterday;
-            Double dPercent = dIncrease / dYesterday * 100;
-            if(dPercent <= -5.5 && stock.statu == 0) {
-                stock.statu = 1;
-                stockMap.put(stock.id_, stock);
-                text += getResources().getString(R.string.stock_increase_percent_title) + ":"
-                        + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + stock.b1_;
-            } else if(dPercent > -5.5 && stock.statu == 1) {
-                stock.statu = 0;
             }
             if(text.length() > 0)
                 sendNotifation(Integer.parseInt(sid), stock.name_, text);
