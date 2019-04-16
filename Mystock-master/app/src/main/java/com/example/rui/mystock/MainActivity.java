@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -403,6 +404,14 @@ public class MainActivity extends AppCompatActivity {
             Double dOpen = Double.parseDouble(stock.open_);
             Double dB1 = Double.parseDouble(stock.bp1_);
             Double dS1 = Double.parseDouble(stock.sp1_);
+
+            String text = "";
+            String sBuy = getResources().getString(R.string.stock_buy);
+            String sSell = getResources().getString(R.string.stock_sell);
+            String sid = stock.id_;
+            sid = sid.replaceAll("sh", "");
+            sid = sid.replaceAll("sz", "");
+
             if(dOpen == 0 && dB1 == 0 && dS1 == 0) {
                 percent.setText("--");
                 increaseValue.setText("--");
@@ -436,28 +445,23 @@ public class MainActivity extends AppCompatActivity {
                 percent.setTextColor(color);
                 increaseValue.setTextColor(color);
 
-                String sid = stock.id_;
-                String text = "";
-                String sBuy = getResources().getString(R.string.stock_buy);
                 if(dPercent <= -4.5 && stock.status == 0) {
                     stock.status = 1;
                     stockMap.put(stock.id_, stock);
-                    text += getResources().getString(R.string.stock_increase_percent_title) + ":"
-                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + stock.b1_;
-                } else if(dPercent > -4.5 && stock.status == 1) {
+                    text += "下跌提示" + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100; // 买1以100为单位，所以要除以100
+                } else if(dPercent > -4.5 && stock.status== 1) {
                     stock.status = 0;
                     stockMap.put(stock.id_, stock);
-                    text += getResources().getString(R.string.stock_increase_percent_title) + ":"
-                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + stock.b1_;
+                    text += "恢复可控" + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
                 }
                 if(stock.b1Prev_ != null) {
-                    if(Double.parseDouble(stock.b1Prev_) - Double.parseDouble(stock.b1_) > 800000) {
-                        text += getResources().getString(R.string.stock_increase_percent_title) + ":"
-                                + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + stock.b1_;
+                    if(((Long.parseLong(stock.b1Prev_) - Long.parseLong(stock.b1_)) / 100 ) > 100000) {
+                        text += "买1锐减，" + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                                + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
                     }
                 }
-                if(text.length() > 0)
-                    sendNotifation(Integer.parseInt(sid), stock.name_, text);
             }
             row.addView(percent);
             row.addView(increaseValue);
@@ -479,43 +483,36 @@ public class MainActivity extends AppCompatActivity {
 
             table.addView(row);
 
-            String sid = stock.id_;
-            sid = sid.replaceAll("sh", "");
-            sid = sid.replaceAll("sz", "");
-
-            String text = "";
-            String sBuy = getResources().getString(R.string.stock_buy);
-            String sSell = getResources().getString(R.string.stock_sell);
-            if(Double.parseDouble(stock.b1_ )>= StockLargeTrade_) {
-                text += sBuy + "1:" + stock.b1_ + ",";
-            }
-            if(Double.parseDouble(stock.b2_ )>= StockLargeTrade_) {
-                text += sBuy + "2:" + stock.b2_ + ",";
-            }
-            if(Double.parseDouble(stock.b3_ )>= StockLargeTrade_) {
-                text += sBuy + "3:" + stock.b3_ + ",";
-            }
-            if(Double.parseDouble(stock.b4_ )>= StockLargeTrade_) {
-                text += sBuy + "4:" + stock.b4_ + ",";
-            }
-            if(Double.parseDouble(stock.b5_ )>= StockLargeTrade_) {
-                text += sBuy + "5:" + stock.b5_ + ",";
-            }
-            if(Double.parseDouble(stock.s1_ )>= StockLargeTrade_) {
-                text += sSell + "1:" + stock.s1_ + ",";
-            }
-            if(Double.parseDouble(stock.s2_ )>= StockLargeTrade_) {
-                text += sSell + "2:" + stock.s2_ + ",";
-            }
-            if(Double.parseDouble(stock.s3_ )>= StockLargeTrade_) {
-                text += sSell + "3:" + stock.s3_ + ",";
-            }
-            if(Double.parseDouble(stock.s4_ )>= StockLargeTrade_) {
-                text += sSell + "4:" + stock.s4_ + ",";
-            }
-            if(Double.parseDouble(stock.s5_ )>= StockLargeTrade_) {
-                text += sSell + "5:" + stock.s5_ + ",";
-            }
+//            if(Double.parseDouble(stock.b1_ )>= StockLargeTrade_) {
+//                text += sBuy + "1:" + stock.b1_ + ",";
+//            }
+//            if(Double.parseDouble(stock.b2_ )>= StockLargeTrade_) {
+//                text += sBuy + "2:" + stock.b2_ + ",";
+//            }
+//            if(Double.parseDouble(stock.b3_ )>= StockLargeTrade_) {
+//                text += sBuy + "3:" + stock.b3_ + ",";
+//            }
+//            if(Double.parseDouble(stock.b4_ )>= StockLargeTrade_) {
+//                text += sBuy + "4:" + stock.b4_ + ",";
+//            }
+//            if(Double.parseDouble(stock.b5_ )>= StockLargeTrade_) {
+//                text += sBuy + "5:" + stock.b5_ + ",";
+//            }
+//            if(Double.parseDouble(stock.s1_ )>= StockLargeTrade_) {
+//                text += sSell + "1:" + stock.s1_ + ",";
+//            }
+//            if(Double.parseDouble(stock.s2_ )>= StockLargeTrade_) {
+//                text += sSell + "2:" + stock.s2_ + ",";
+//            }
+//            if(Double.parseDouble(stock.s3_ )>= StockLargeTrade_) {
+//                text += sSell + "3:" + stock.s3_ + ",";
+//            }
+//            if(Double.parseDouble(stock.s4_ )>= StockLargeTrade_) {
+//                text += sSell + "4:" + stock.s4_ + ",";
+//            }
+//            if(Double.parseDouble(stock.s5_ )>= StockLargeTrade_) {
+//                text += sSell + "5:" + stock.s5_ + ",";
+//            }
             if(text.length() > 0)
                 sendNotifation(Integer.parseInt(sid), stock.name_, text);
         }
