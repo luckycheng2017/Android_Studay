@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
             for (String selectedId : SelectedStockItems_){
                 StockIds_.remove(selectedId);
+                stockMap.remove(selectedId);
                 TableLayout table = (TableLayout)findViewById(R.id.stock_table);
                 int count = table.getChildCount();
                 for (int i = 1; i < count; i++){
@@ -153,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
         public String sp1_, sp2_, sp3_, sp4_, sp5_;
         public String time_;
         public int status; // 0:正常, 1:跌
-        public String b1Prev_; // 上一次买1的值
     }
 
     public TreeMap<String, Stock> sinaResponseToStocks(String response){
@@ -177,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
             stockNow.id_ = left.split("_")[2];
             if(stockMap.containsKey(stockNow.id_)) {
                 stockNow.status = stockMap.get(stockNow.id_).status;
-                stockNow.b1Prev_ = stockMap.get(stockNow.id_).b1_;
             }
 
             String[] values = right.split(",");
@@ -394,7 +393,7 @@ public class MainActivity extends AppCompatActivity {
 
             TextView now = new TextView(this);
             now.setGravity(Gravity.RIGHT);
-            now.setText(stock.now_);
+            now.setText(stock.now_.substring(0, stock.now_.length() - 1));
             row.addView(now);
 
             TextView percent = new TextView(this);
@@ -456,12 +455,11 @@ public class MainActivity extends AppCompatActivity {
                     text += "恢复可控" + getResources().getString(R.string.stock_increase_percent_title) + ":"
                             + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
                 }
-                if(stock.b1Prev_ != null) {
-                    if(((Long.parseLong(stock.b1Prev_) - Long.parseLong(stock.b1_)) / 100 ) > 100000) {
-                        text += "买1锐减，" + getResources().getString(R.string.stock_increase_percent_title) + ":"
-                                + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
-                    }
-                }
+                // 还待完善
+//                if((Long.parseLong(stock.b1_) / 100 ) <= 500000) {
+//                    text += "买1锐减提示，" + getResources().getString(R.string.stock_increase_percent_title) + ":"
+//                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
+//                }
             }
             row.addView(percent);
             row.addView(increaseValue);
