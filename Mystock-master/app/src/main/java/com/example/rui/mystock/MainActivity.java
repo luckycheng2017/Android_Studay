@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,11 +47,15 @@ public class MainActivity extends AppCompatActivity {
     private final static int StockLargeTrade_ = 1000000;
 
     private static TreeMap<String, Stock> stockMap = new TreeMap();
+    private StockParameterDatabaseHelper stockParaDbaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        stockParaDbaseHelper = new StockParameterDatabaseHelper(this, "StockParameter.db", null, 1);
+        stockParaDbaseHelper.getWritableDatabase();
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         String idsStr = sharedPref.getString(StockIdsKey_, ShIndex + "," + SzIndex + "," + ChuangIndex);
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 refreshStocks();
             }
-        }, 0, 1000); // 1 seconds
+        }, 0, 2000); // 2 seconds
     }
 
     @Override
