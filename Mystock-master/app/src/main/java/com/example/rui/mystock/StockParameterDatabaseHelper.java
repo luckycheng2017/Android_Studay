@@ -13,16 +13,20 @@ public class StockParameterDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String CREATE_STOCK_PAR = "create table StockParameter ("
             + "StockID integer primary key autoincrement, "
-            + "Increase real, "
-            + "IncreaseSwitch blob, "
+            + "Rise real, "
+            + "RiseSwitch blob, "
             + "Fall real, "
             + "FallSwitch blob, "
-            + "IncreaseAmount real, "
-            + "IncreaseAmountSwitch blob, "
+            + "RiseAmount real, "
+            + "RiseAmountSwitch blob, "
             + "FallAmount real, "
             + "FallAmountSwitch blob, "
             + "Buy1Value integer, "
-            + "Buy1ValueSwitch blob)";
+            + "Buy1ValueSwitch blob, "
+            + "AverageDiffRise real, "
+            + "ADRiseSwitch blob, "
+            + "AverageDiffFall real, "
+            + "ADFallWwitch blob)";
 
     private Context mContext;
 
