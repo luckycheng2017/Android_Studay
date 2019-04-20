@@ -389,10 +389,11 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout nameId = new LinearLayout(this);
             nameId.setOrientation(LinearLayout.VERTICAL);
             TextView name = new TextView(this);
+            name.setTextSize(17);
             name.setText(stock.name_);
             nameId.addView(name);
             TextView id = new TextView(this);
-            id.setTextSize(10);
+            id.setTextSize(13);
             id.setText(stock.id_);
             nameId.addView(id);
             row.addView(nameId);
@@ -416,6 +417,10 @@ public class MainActivity extends AppCompatActivity {
             String sid = stock.id_;
             sid = sid.replaceAll("sh", "");
             sid = sid.replaceAll("sz", "");
+
+            percent.setTextSize(20);
+            increaseValue.setTextSize(20);
+            now.setTextSize(20);
 
             if(dOpen == 0 && dB1 == 0 && dS1 == 0) {
                 percent.setText("--");
