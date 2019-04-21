@@ -13,6 +13,59 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="股价:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="--"
+            android:id="@+id/stockNowPrice"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="12dp"
+            android:text="均价:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="--"
+            android:id="@+id/nowAveragePrice"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="12dp"
+            android:text="涨幅:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="--"
+            android:id="@+id/riseAmount"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="12dp"
+            android:text="买1数:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="--"
+            android:id="@+id/buy1Num"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="股价上涨提示:"/>
         <EditText
@@ -21,12 +74,13 @@
             android:inputType="numberDecimal"
             android:maxLength="9"
             android:layout_weight="0.8"
-            android:id="@+id/price_inc"/>
+            android:id="@+id/price_rise"/>
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
-            android:id="@+id/price_inc_switch"/>
+            android:layout_marginRight="12dp"
+            android:id="@+id/price_rise_switch"/>
     </LinearLayout>
 
     <LinearLayout
@@ -44,12 +98,13 @@
             android:inputType="numberDecimal"
             android:maxLength="9"
             android:layout_weight="0.8"
-            android:id="@+id/price_fall_amount"/>
+            android:id="@+id/price_fall"/>
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
             android:layout_weight="0.1"
-            android:id="@+id/price_fall_amount_switch"/>
+            android:id="@+id/price_fall_switch"/>
     </LinearLayout>
 
     <LinearLayout
@@ -67,12 +122,18 @@
             android:inputType="numberDecimal"
             android:maxLength="9"
             android:layout_weight="0.8"
-            android:id="@+id/price_inc_amount"/>
+            android:id="@+id/price_rise_amount"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="%"/>
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
             android:layout_weight="0.1"
-            android:id="@+id/price_inc_amount_switch"/>
+            android:id="@+id/price_rise_amount_switch"/>
     </LinearLayout>
 
     <LinearLayout
@@ -90,12 +151,18 @@
             android:inputType="numberDecimal"
             android:maxLength="9"
             android:layout_weight="0.8"
-            android:id="@+id/price_fall"/>
+            android:id="@+id/price_fall_amount"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="%"/>
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
             android:layout_weight="0.1"
-            android:id="@+id/price_fall_switch"/>
+            android:id="@+id/price_fall_amount_switch"/>
     </LinearLayout>
 
     <LinearLayout
@@ -117,6 +184,7 @@
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
             android:layout_weight="0.1"
             android:id="@+id/buy1_switch"/>
     </LinearLayout>
@@ -140,6 +208,7 @@
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
             android:layout_weight="0.1"
             android:id="@+id/Average_rise_switch"/>
     </LinearLayout>
@@ -163,8 +232,17 @@
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
             android:layout_weight="0.1"
             android:id="@+id/Average_fall_switch"/>
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="保存"
+        android:id="@+id/save_parameter"
+        android:onClick="saveParameter"/>
 
 </LinearLayout>

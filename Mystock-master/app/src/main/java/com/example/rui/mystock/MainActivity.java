@@ -1,13 +1,16 @@
 package com.example.rui.mystock;
 
 import android.app.NotificationManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         stockParaDbaseHelper = new StockParameterDatabaseHelper(this, "StockParameter.db", null, 1);
-        stockParaDbaseHelper.getWritableDatabase();
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         String idsStr = sharedPref.getString(StockIdsKey_, ShIndex + "," + SzIndex + "," + ChuangIndex);
@@ -106,8 +108,22 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(intent);
+            if(SelectedStockItems_.size() == 1) {
+                Double dNow = Double.parseDouble(stockMap.get(SelectedStockItems_.firstElement()).now_);
+                Double dYesterday = Double.parseDouble(stockMap.get(SelectedStockItems_.firstElement()).yesterday_);
+                Double dIncrease = dNow - dYesterday;
+                Double dPercent = dIncrease / dYesterday * 100;
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("stockID", stockMap.get(SelectedStockItems_.firstElement()).id_);
+                bundle.putString("nowPrice", stockMap.get(SelectedStockItems_.firstElement()).now_.substring(0,
+                        stockMap.get(SelectedStockItems_.firstElement()).now_.length() - 1));
+                bundle.putString("amount", String.format("%.2f", dPercent) + "%");
+                bundle.putString("buy1", stockMap.get(SelectedStockItems_.firstElement()).b1_.substring(0,
+                        stockMap.get(SelectedStockItems_.firstElement()).b1_.length() - 2));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
             return true;
         }
         else if(id == R.id.action_delete){
@@ -117,6 +133,9 @@ public class MainActivity extends AppCompatActivity {
             for (String selectedId : SelectedStockItems_){
                 StockIds_.remove(selectedId);
                 stockMap.remove(selectedId);
+                SQLiteDatabase stockParamerDB = stockParaDbaseHelper.getWritableDatabase();
+                stockParamerDB.delete("StockParameter", "StockID = ?", new String[]{selectedId});
+                stockParamerDB.close();
                 TableLayout table = (TableLayout)findViewById(R.id.stock_table);
                 int count = table.getChildCount();
                 for (int i = 1; i < count; i++){
@@ -159,7 +178,12 @@ public class MainActivity extends AppCompatActivity {
         public String s1_, s2_, s3_, s4_, s5_;
         public String sp1_, sp2_, sp3_, sp4_, sp5_;
         public String time_;
-        public int status; // 0:正常, 1:跌
+        public int riseStatus; // 0:正常, 1:上涨, 防止不断提示
+        public int fallStatus; // 0:正常, 1:下跌
+        public int riseAmountStatus; // 0:正常, 1:上涨
+        public int fallAmountStatus; // 0:正常, 1:下跌
+        public int averageDiffRiseStatus; // 0:正常, 1:上涨
+        public int averageDiffFallStatus; // 0:正常, 1:下跌
     }
 
     public TreeMap<String, Stock> sinaResponseToStocks(String response){
@@ -182,7 +206,12 @@ public class MainActivity extends AppCompatActivity {
             Stock stockNow = new Stock();
             stockNow.id_ = left.split("_")[2];
             if(stockMap.containsKey(stockNow.id_)) {
-                stockNow.status = stockMap.get(stockNow.id_).status;
+                stockNow.riseStatus = stockMap.get(stockNow.id_).riseStatus;
+                stockNow.fallStatus = stockMap.get(stockNow.id_).fallStatus;
+                stockNow.riseAmountStatus = stockMap.get(stockNow.id_).riseAmountStatus;
+                stockNow.fallAmountStatus = stockMap.get(stockNow.id_).fallAmountStatus;
+                stockNow.averageDiffRiseStatus = stockMap.get(stockNow.id_).averageDiffRiseStatus;
+                stockNow.averageDiffFallStatus = stockMap.get(stockNow.id_).averageDiffFallStatus;
             }
 
             String[] values = right.split(",");
@@ -264,7 +293,30 @@ public class MainActivity extends AppCompatActivity {
         } else
             return;
 
-        StockIds_.add(stockId);
+        if (StockIds_.contains(stockId)){
+            return;
+        } else {
+            StockIds_.add(stockId);
+            SQLiteDatabase stockParamerDB = stockParaDbaseHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("StockID", stockId);
+            values.put("Rise", 0.00);
+            values.put("RiseSwitch", (byte)0);
+            values.put("Fall", 0.00);
+            values.put("FallSwitch", (byte)0);
+            values.put("RiseAmount", 0.00);
+            values.put("RiseAmountSwitch", (byte)0);
+            values.put("FallAmount", 0.00);
+            values.put("FallAmountSwitch", (byte)0);
+            values.put("Buy1Value", 0);
+            values.put("Buy1ValueSwitch", (byte)0);
+            values.put("AverageDiffRise", 0.00);
+            values.put("ADRiseSwitch", (byte)0);
+            values.put("AverageDiffFall", 0.00);
+            values.put("ADFallWwitch", (byte)0);
+            stockParamerDB.insert("StockParameter", null, values);
+            stockParamerDB.close();
+        }
         refreshStocks();
     }
 
@@ -455,17 +507,17 @@ public class MainActivity extends AppCompatActivity {
                 percent.setTextColor(color);
                 increaseValue.setTextColor(color);
 
-                if(dPercent <= -4.5 && stock.status == 0) {
-                    stock.status = 1;
-                    stockMap.put(stock.id_, stock);
-                    text += "下跌提示" + getResources().getString(R.string.stock_increase_percent_title) + ":"
-                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100; // 买1以100为单位，所以要除以100
-                } else if(dPercent > -4.5 && stock.status== 1) {
-                    stock.status = 0;
-                    stockMap.put(stock.id_, stock);
-                    text += "恢复可控" + getResources().getString(R.string.stock_increase_percent_title) + ":"
-                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
-                }
+//                if(dPercent <= -4.5 && stock.status == 0) {
+//                    stock.status = 1;
+//                    stockMap.put(stock.id_, stock);
+//                    text += "下跌提示" + getResources().getString(R.string.stock_increase_percent_title) + ":"
+//                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100; // 买1以100为单位，所以要除以100
+//                } else if(dPercent > -4.5 && stock.status== 1) {
+//                    stock.status = 0;
+//                    stockMap.put(stock.id_, stock);
+//                    text += "恢复可控" + getResources().getString(R.string.stock_increase_percent_title) + ":"
+//                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
+//                }
                 // 还待完善
 //                if((Long.parseLong(stock.b1_) / 100 ) <= 500000) {
 //                    text += "买1锐减提示，" + getResources().getString(R.string.stock_increase_percent_title) + ":"

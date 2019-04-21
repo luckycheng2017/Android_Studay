@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class StockParameterDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String CREATE_STOCK_PAR = "create table StockParameter ("
-            + "StockID integer primary key autoincrement, "
+            + "StockID text primary key, "
             + "Rise real, "
             + "RiseSwitch blob, "
             + "Fall real, "
