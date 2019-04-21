@@ -7,12 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class SettingsActivity extends AppCompatActivity {
 
     private StockParameterDatabaseHelper stockParaDbaseHelper;
+    private int priceRiseSwitchStatus;
+    private int priceFallSwitchStatus;
+    private int priceRiseAmountSwitchStatus;
+    private int priceFallAmountSwitchStatus;
+    private int buy1SwitchStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,12 @@ public class SettingsActivity extends AppCompatActivity {
         EditText priceFallAmount = (EditText) findViewById(R.id.price_fall_amount);
         EditText buy1Set = (EditText) findViewById(R.id.buy1_set);
 
+        Switch priceRiseSwitch = (Switch) findViewById(R.id.price_rise_switch);
+        Switch priceFallSwitch = (Switch) findViewById(R.id.price_fall_switch);
+        Switch priceRiseAmountSwitch = (Switch) findViewById(R.id.price_rise_amount_switch);
+        Switch priceFallAmountSwitch = (Switch) findViewById(R.id.price_fall_amount_switch);
+        Switch buy1Switch = (Switch) findViewById(R.id.buy1_switch);
+
         Cursor cursor =stockParameterDB.query("StockParameter", null, "StockID = ?",
                 new String[]{intent.getStringExtra("stockID")}, null, null, null);
         if (cursor.moveToFirst()) {
@@ -47,7 +60,104 @@ public class SettingsActivity extends AppCompatActivity {
             priceRiseAmount.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex("RiseAmount"))));
             priceFallAmount.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex("FallAmount"))));
             buy1Set.setText(String.valueOf(cursor.getInt(cursor.getColumnIndex("Buy1Value"))));
+
+            if (cursor.getInt(cursor.getColumnIndex("RiseSwitch")) == 1) {
+                priceRiseSwitch.setChecked(true);
+                priceRiseSwitchStatus = 1;
+            } else {
+                priceRiseSwitch.setChecked(false);
+                priceRiseSwitchStatus = 0;
+            }
+
+            if (cursor.getInt(cursor.getColumnIndex("FallSwitch")) == 1) {
+                priceFallSwitch.setChecked(true);
+                priceFallSwitchStatus = 1;
+            } else {
+                priceFallSwitch.setChecked(false);
+                priceFallSwitchStatus = 0;
+            }
+
+            if (cursor.getInt(cursor.getColumnIndex("RiseAmountSwitch")) == 1) {
+                priceRiseAmountSwitch.setChecked(true);
+                priceRiseAmountSwitchStatus = 1;
+            } else {
+                priceRiseAmountSwitch.setChecked(false);
+                priceRiseAmountSwitchStatus = 0;
+            }
+
+            if (cursor.getInt(cursor.getColumnIndex("FallAmountSwitch")) == 1) {
+                priceFallAmountSwitch.setChecked(true);
+                priceFallAmountSwitchStatus = 1;
+            } else {
+                priceFallAmountSwitch.setChecked(false);
+                priceFallAmountSwitchStatus = 0;
+            }
+
+            if (cursor.getInt(cursor.getColumnIndex("Buy1ValueSwitch")) == 1) {
+                buy1Switch.setChecked(true);
+                buy1SwitchStatus = 1;
+            } else {
+                buy1Switch.setChecked(false);
+                buy1SwitchStatus = 0;
+            }
+
         }
+
+        priceRiseSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    priceRiseSwitchStatus = 1;
+                } else {
+                    priceRiseSwitchStatus = 0;
+                }
+            }
+        });
+
+        priceFallSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    priceFallSwitchStatus = 1;
+                } else {
+                    priceFallSwitchStatus = 0;
+                }
+            }
+        });
+
+        priceRiseAmountSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    priceRiseAmountSwitchStatus = 1;
+                } else {
+                    priceRiseAmountSwitchStatus = 0;
+                }
+            }
+        });
+
+        priceFallAmountSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    priceFallAmountSwitchStatus = 1;
+                } else {
+                    priceFallAmountSwitchStatus = 0;
+                }
+            }
+        });
+
+        buy1Switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    buy1SwitchStatus = 1;
+                } else {
+                    buy1SwitchStatus = 0;
+                }
+            }
+        });
+
         stockParameterDB.close();
     }
 
@@ -62,11 +172,19 @@ public class SettingsActivity extends AppCompatActivity {
         EditText priceFallAmount = (EditText) findViewById(R.id.price_fall_amount);
         EditText buy1Set = (EditText) findViewById(R.id.buy1_set);
 
+
+
         values.put("Rise", Double.valueOf(priceRise.getText().toString()));
         values.put("Fall", Double.valueOf(priceFall.getText().toString()));
         values.put("RiseAmount", Double.valueOf(priceRiseAmount.getText().toString()));
         values.put("FallAmount", Double.valueOf(priceFallAmount.getText().toString()));
         values.put("Buy1Value", Integer.valueOf(buy1Set.getText().toString()));
+
+        values.put("RiseSwitch", priceRiseSwitchStatus);
+        values.put("FallSwitch", priceFallSwitchStatus);
+        values.put("RiseAmountSwitch", priceRiseAmountSwitchStatus);
+        values.put("FallAmountSwitch", priceFallAmountSwitchStatus);
+        values.put("Buy1ValueSwitch", buy1SwitchStatus);
 
         stockParameterDB.update("StockParameter", values, "StockID = ?",
                 new String[]{intent.getStringExtra("stockID")});
