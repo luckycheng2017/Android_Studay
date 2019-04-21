@@ -6,11 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -172,22 +174,31 @@ public class SettingsActivity extends AppCompatActivity {
         EditText priceFallAmount = (EditText) findViewById(R.id.price_fall_amount);
         EditText buy1Set = (EditText) findViewById(R.id.buy1_set);
 
+        if (!TextUtils.isEmpty(priceRise.getText())
+                && !TextUtils.isEmpty(priceFall.getText())
+                && !TextUtils.isEmpty(priceRiseAmount.getText())
+                && !TextUtils.isEmpty(priceFallAmount.getText())
+                && !TextUtils.isEmpty(buy1Set.getText())) {
+            values.put("Rise", Double.valueOf(priceRise.getText().toString()));
+            values.put("Fall", Double.valueOf(priceFall.getText().toString()));
+            values.put("RiseAmount", Double.valueOf(priceRiseAmount.getText().toString()));
+            values.put("FallAmount", Double.valueOf(priceFallAmount.getText().toString()));
+            values.put("Buy1Value", Integer.valueOf(buy1Set.getText().toString()));
 
+            values.put("RiseSwitch", priceRiseSwitchStatus);
+            values.put("FallSwitch", priceFallSwitchStatus);
+            values.put("RiseAmountSwitch", priceRiseAmountSwitchStatus);
+            values.put("FallAmountSwitch", priceFallAmountSwitchStatus);
+            values.put("Buy1ValueSwitch", buy1SwitchStatus);
 
-        values.put("Rise", Double.valueOf(priceRise.getText().toString()));
-        values.put("Fall", Double.valueOf(priceFall.getText().toString()));
-        values.put("RiseAmount", Double.valueOf(priceRiseAmount.getText().toString()));
-        values.put("FallAmount", Double.valueOf(priceFallAmount.getText().toString()));
-        values.put("Buy1Value", Integer.valueOf(buy1Set.getText().toString()));
+            stockParameterDB.update("StockParameter", values, "StockID = ?",
+                    new String[]{intent.getStringExtra("stockID")});
+            values.clear();
+            Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "请输入数值", Toast.LENGTH_LONG).show();
+        }
 
-        values.put("RiseSwitch", priceRiseSwitchStatus);
-        values.put("FallSwitch", priceFallSwitchStatus);
-        values.put("RiseAmountSwitch", priceRiseAmountSwitchStatus);
-        values.put("FallAmountSwitch", priceFallAmountSwitchStatus);
-        values.put("Buy1ValueSwitch", buy1SwitchStatus);
-
-        stockParameterDB.update("StockParameter", values, "StockID = ?",
-                new String[]{intent.getStringExtra("stockID")});
         stockParameterDB.close();
     }
 

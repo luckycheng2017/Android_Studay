@@ -316,6 +316,7 @@ public class MainActivity extends AppCompatActivity {
             values.put("AverageDiffFall", 0.00);
             values.put("ADFallWwitch", (byte)0);
             stockParamerDB.insert("StockParameter", null, values);
+            values.clear();
             stockParamerDB.close();
         }
         refreshStocks();
