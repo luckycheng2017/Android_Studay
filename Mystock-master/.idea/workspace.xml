@@ -55,15 +55,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6657">
-              <caret line="282" column="27" selection-start-line="282" selection-start-column="27" selection-end-line="282" selection-end-column="27" />
+            <state relative-caret-position="326">
+              <caret line="588" column="29" selection-start-line="588" selection-start-column="29" selection-end-line="588" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1555815526887" expanded="false" signature="20613:20676" ph="&quot;涨幅&quot;" />
-                <marker date="1555815526887" expanded="false" signature="21023:21086" ph="&quot;涨幅&quot;" />
+                <element signature="e#10432#10674#0" expanded="true" />
+                <element signature="e#10673#10674#0" expanded="true" />
+                <element signature="e#13282#13358#0" expanded="false" />
+                <element signature="e#21188#21251#0" expanded="true" />
+                <element signature="e#21859#21922#0" expanded="true" />
+                <element signature="e#22547#22610#0" expanded="true" />
+                <element signature="e#23240#23303#0" expanded="true" />
+                <element signature="e#23952#24015#0" expanded="true" />
+                <element signature="e#24699#24762#0" expanded="true" />
+                <element signature="e#25411#25474#0" expanded="true" />
+                <element signature="e#26158#26221#0" expanded="true" />
+                <element signature="e#26731#26794#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,23 +104,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SettingsActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SettingsActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/SettingsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="192" column="0" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
+            <state relative-caret-position="-94">
+              <caret line="61" column="58" selection-start-line="61" selection-start-column="58" selection-end-line="61" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4625#4976#0" expanded="true" />
-                <element signature="e#4975#4976#0" expanded="true" />
-                <element signature="e#5031#5382#0" expanded="true" />
-                <element signature="e#5381#5382#0" expanded="true" />
-                <element signature="e#5443#5806#0" expanded="true" />
-                <element signature="e#5805#5806#0" expanded="true" />
-                <element signature="e#5867#6230#0" expanded="true" />
-                <element signature="e#6229#6230#0" expanded="true" />
-                <element signature="e#6280#6621#0" expanded="true" />
-                <element signature="e#6620#6621#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -119,11 +119,59 @@
       <file leaf-file-name="ContentValues.java" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AndroidSDK/sources/android-23/android/content/ContentValues.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
+            <state relative-caret-position="2744">
               <caret line="133" column="16" selection-start-line="133" selection-start-column="16" selection-end-line="133" selection-end-column="16" />
               <folding>
-                <element signature="e#3625#3626#0" expanded="true" />
-                <element signature="e#3664#3665#0" expanded="true" />
+                <element signature="e#0#15141#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#1587#1588#0" expanded="false" />
+                <element signature="e#1652#1653#0" expanded="false" />
+                <element signature="e#2146#2147#0" expanded="false" />
+                <element signature="e#2178#2179#0" expanded="false" />
+                <element signature="e#2436#2437#0" expanded="false" />
+                <element signature="e#2477#2478#0" expanded="false" />
+                <element signature="e#2678#2679#0" expanded="false" />
+                <element signature="e#2717#2718#0" expanded="false" />
+                <element signature="e#2901#2902#0" expanded="false" />
+                <element signature="e#2946#2947#0" expanded="false" />
+                <element signature="e#3145#3146#0" expanded="false" />
+                <element signature="e#3184#3185#0" expanded="false" />
+                <element signature="e#3384#3385#0" expanded="false" />
+                <element signature="e#3423#3424#0" expanded="false" />
+                <element signature="e#3863#3864#0" expanded="false" />
+                <element signature="e#3902#3903#0" expanded="false" />
+                <element signature="e#4102#4103#0" expanded="false" />
+                <element signature="e#4141#4142#0" expanded="false" />
+                <element signature="e#4342#4343#0" expanded="false" />
+                <element signature="e#4381#4382#0" expanded="false" />
+                <element signature="e#4583#4584#0" expanded="false" />
+                <element signature="e#4622#4623#0" expanded="false" />
+                <element signature="e#4823#4824#0" expanded="false" />
+                <element signature="e#4862#4863#0" expanded="false" />
+                <element signature="e#5014#5015#0" expanded="false" />
+                <element signature="e#5052#5053#0" expanded="false" />
+                <element signature="e#5173#5174#0" expanded="false" />
+                <element signature="e#5210#5211#0" expanded="false" />
+                <element signature="e#5351#5352#0" expanded="false" />
+                <element signature="e#5386#5387#0" expanded="false" />
+                <element signature="e#5456#5457#0" expanded="false" />
+                <element signature="e#5487#5488#0" expanded="false" />
+                <element signature="e#5730#5731#0" expanded="false" />
+                <element signature="e#5777#5778#0" expanded="false" />
+                <element signature="e#6029#6030#0" expanded="false" />
+                <element signature="e#6068#6069#0" expanded="false" />
+                <element signature="e#13196#13197#0" expanded="false" />
+                <element signature="e#13237#13238#0" expanded="false" />
+                <element signature="e#13375#13376#0" expanded="false" />
+                <element signature="e#13414#13415#0" expanded="false" />
+                <element signature="e#13900#13901#0" expanded="false" />
+                <element signature="e#13954#13955#0" expanded="false" />
+                <element signature="e#13998#13999#0" expanded="false" />
+                <element signature="e#14022#14023#0" expanded="false" />
+                <element signature="e#14118#14119#0" expanded="false" />
+                <element signature="e#14158#14159#0" expanded="false" />
+                <element signature="e#14343#14344#0" expanded="false" />
+                <element signature="e#14382#14383#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -132,11 +180,47 @@
       <file leaf-file-name="Switch.java" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AndroidSDK/sources/android-23/android/widget/Switch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
+            <state relative-caret-position="27720">
               <caret line="1068" column="16" selection-start-line="1068" selection-start-column="16" selection-end-line="1068" selection-end-column="16" />
               <folding>
-                <element signature="e#36634#36635#0" expanded="true" />
-                <element signature="e#36678#36679#0" expanded="true" />
+                <element signature="e#0#49640#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#6110#6111#0" expanded="false" />
+                <element signature="e#6145#6146#0" expanded="false" />
+                <element signature="e#16276#16277#0" expanded="false" />
+                <element signature="e#16313#16314#0" expanded="false" />
+                <element signature="e#17135#17136#0" expanded="false" />
+                <element signature="e#17173#17174#0" expanded="false" />
+                <element signature="e#17807#17808#0" expanded="false" />
+                <element signature="e#17847#17848#0" expanded="false" />
+                <element signature="e#18878#18879#0" expanded="false" />
+                <element signature="e#18915#18916#0" expanded="false" />
+                <element signature="e#19910#19911#0" expanded="false" />
+                <element signature="e#19947#19948#0" expanded="false" />
+                <element signature="e#20886#20887#0" expanded="false" />
+                <element signature="e#20923#20924#0" expanded="false" />
+                <element signature="e#22797#22798#0" expanded="false" />
+                <element signature="e#22834#22835#0" expanded="false" />
+                <element signature="e#23829#23830#0" expanded="false" />
+                <element signature="e#23866#23867#0" expanded="false" />
+                <element signature="e#24805#24806#0" expanded="false" />
+                <element signature="e#24842#24843#0" expanded="false" />
+                <element signature="e#26175#26176#0" expanded="false" />
+                <element signature="e#26209#26210#0" expanded="false" />
+                <element signature="e#26397#26398#0" expanded="false" />
+                <element signature="e#26427#26428#0" expanded="false" />
+                <element signature="e#26874#26875#0" expanded="false" />
+                <element signature="e#26905#26906#0" expanded="false" />
+                <element signature="e#27688#27689#0" expanded="false" />
+                <element signature="e#27720#27721#0" expanded="false" />
+                <element signature="e#36987#36988#0" expanded="false" />
+                <element signature="e#37027#37028#0" expanded="false" />
+                <element signature="e#47703#47704#0" expanded="false" />
+                <element signature="e#47748#47749#0" expanded="false" />
+                <element signature="e#49445#49446#0" expanded="false" />
+                <element signature="e#49497#49498#0" expanded="false" />
+                <element signature="e#49575#49576#0" expanded="false" />
+                <element signature="e#49629#49630#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -181,7 +265,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
+            <state relative-caret-position="5264">
               <caret line="188" column="40" selection-start-line="188" selection-start-column="29" selection-end-line="188" selection-end-column="40" />
               <folding />
             </state>
@@ -1499,10 +1583,10 @@
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/StockDatabaseHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/stock_listitem.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/settings_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/StockParameterDatabaseHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/SettingsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -1535,9 +1619,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1626,9 +1711,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2106,8 +2190,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.50213903" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29064587" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29064587" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32882884" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -2131,6 +2214,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912844" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19265033" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2169,8 +2253,18 @@
           <caret line="115" column="36" selection-start-line="115" selection-start-column="36" selection-end-line="115" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1555815526887" expanded="false" signature="20613:20676" ph="&quot;涨幅&quot;" />
-            <marker date="1555815526887" expanded="false" signature="21023:21086" ph="&quot;涨幅&quot;" />
+            <element signature="e#10432#10674#0" expanded="true" />
+            <element signature="e#10673#10674#0" expanded="true" />
+            <element signature="e#13282#13358#0" expanded="false" />
+            <element signature="e#21188#21251#0" expanded="true" />
+            <element signature="e#21859#21922#0" expanded="true" />
+            <element signature="e#22547#22610#0" expanded="true" />
+            <element signature="e#23240#23303#0" expanded="true" />
+            <element signature="e#23952#24015#0" expanded="true" />
+            <element signature="e#24699#24762#0" expanded="true" />
+            <element signature="e#25411#25474#0" expanded="true" />
+            <element signature="e#26158#26221#0" expanded="true" />
+            <element signature="e#26731#26794#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2241,8 +2335,18 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1555815526887" expanded="false" signature="20613:20676" ph="&quot;涨幅&quot;" />
-            <marker date="1555815526887" expanded="false" signature="21023:21086" ph="&quot;涨幅&quot;" />
+            <element signature="e#10432#10674#0" expanded="true" />
+            <element signature="e#10673#10674#0" expanded="true" />
+            <element signature="e#13282#13358#0" expanded="false" />
+            <element signature="e#21188#21251#0" expanded="true" />
+            <element signature="e#21859#21922#0" expanded="true" />
+            <element signature="e#22547#22610#0" expanded="true" />
+            <element signature="e#23240#23303#0" expanded="true" />
+            <element signature="e#23952#24015#0" expanded="true" />
+            <element signature="e#24699#24762#0" expanded="true" />
+            <element signature="e#25411#25474#0" expanded="true" />
+            <element signature="e#26158#26221#0" expanded="true" />
+            <element signature="e#26731#26794#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2307,8 +2411,18 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1555815526887" expanded="false" signature="20613:20676" ph="&quot;涨幅&quot;" />
-            <marker date="1555815526887" expanded="false" signature="21023:21086" ph="&quot;涨幅&quot;" />
+            <element signature="e#10432#10674#0" expanded="true" />
+            <element signature="e#10673#10674#0" expanded="true" />
+            <element signature="e#13282#13358#0" expanded="false" />
+            <element signature="e#21188#21251#0" expanded="true" />
+            <element signature="e#21859#21922#0" expanded="true" />
+            <element signature="e#22547#22610#0" expanded="true" />
+            <element signature="e#23240#23303#0" expanded="true" />
+            <element signature="e#23952#24015#0" expanded="true" />
+            <element signature="e#24699#24762#0" expanded="true" />
+            <element signature="e#25411#25474#0" expanded="true" />
+            <element signature="e#26158#26221#0" expanded="true" />
+            <element signature="e#26731#26794#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2542,7 +2656,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
+        <state relative-caret-position="5264">
           <caret line="188" column="40" selection-start-line="188" selection-start-column="29" selection-end-line="188" selection-end-column="40" />
           <folding />
         </state>
@@ -2550,34 +2664,116 @@
     </entry>
     <entry file="file://$USER_HOME$/AndroidSDK/sources/android-23/android/widget/Switch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
+        <state relative-caret-position="27720">
           <caret line="1068" column="16" selection-start-line="1068" selection-start-column="16" selection-end-line="1068" selection-end-column="16" />
           <folding>
-            <element signature="e#36634#36635#0" expanded="true" />
-            <element signature="e#36678#36679#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6657">
-          <caret line="282" column="27" selection-start-line="282" selection-start-column="27" selection-end-line="282" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1555815526887" expanded="false" signature="20613:20676" ph="&quot;涨幅&quot;" />
-            <marker date="1555815526887" expanded="false" signature="21023:21086" ph="&quot;涨幅&quot;" />
+            <element signature="e#0#49640#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#6110#6111#0" expanded="false" />
+            <element signature="e#6145#6146#0" expanded="false" />
+            <element signature="e#16276#16277#0" expanded="false" />
+            <element signature="e#16313#16314#0" expanded="false" />
+            <element signature="e#17135#17136#0" expanded="false" />
+            <element signature="e#17173#17174#0" expanded="false" />
+            <element signature="e#17807#17808#0" expanded="false" />
+            <element signature="e#17847#17848#0" expanded="false" />
+            <element signature="e#18878#18879#0" expanded="false" />
+            <element signature="e#18915#18916#0" expanded="false" />
+            <element signature="e#19910#19911#0" expanded="false" />
+            <element signature="e#19947#19948#0" expanded="false" />
+            <element signature="e#20886#20887#0" expanded="false" />
+            <element signature="e#20923#20924#0" expanded="false" />
+            <element signature="e#22797#22798#0" expanded="false" />
+            <element signature="e#22834#22835#0" expanded="false" />
+            <element signature="e#23829#23830#0" expanded="false" />
+            <element signature="e#23866#23867#0" expanded="false" />
+            <element signature="e#24805#24806#0" expanded="false" />
+            <element signature="e#24842#24843#0" expanded="false" />
+            <element signature="e#26175#26176#0" expanded="false" />
+            <element signature="e#26209#26210#0" expanded="false" />
+            <element signature="e#26397#26398#0" expanded="false" />
+            <element signature="e#26427#26428#0" expanded="false" />
+            <element signature="e#26874#26875#0" expanded="false" />
+            <element signature="e#26905#26906#0" expanded="false" />
+            <element signature="e#27688#27689#0" expanded="false" />
+            <element signature="e#27720#27721#0" expanded="false" />
+            <element signature="e#36987#36988#0" expanded="false" />
+            <element signature="e#37027#37028#0" expanded="false" />
+            <element signature="e#47703#47704#0" expanded="false" />
+            <element signature="e#47748#47749#0" expanded="false" />
+            <element signature="e#49445#49446#0" expanded="false" />
+            <element signature="e#49497#49498#0" expanded="false" />
+            <element signature="e#49575#49576#0" expanded="false" />
+            <element signature="e#49629#49630#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AndroidSDK/sources/android-23/android/content/ContentValues.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
+        <state relative-caret-position="2744">
           <caret line="133" column="16" selection-start-line="133" selection-start-column="16" selection-end-line="133" selection-end-column="16" />
           <folding>
-            <element signature="e#3625#3626#0" expanded="true" />
-            <element signature="e#3664#3665#0" expanded="true" />
+            <element signature="e#0#15141#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1587#1588#0" expanded="false" />
+            <element signature="e#1652#1653#0" expanded="false" />
+            <element signature="e#2146#2147#0" expanded="false" />
+            <element signature="e#2178#2179#0" expanded="false" />
+            <element signature="e#2436#2437#0" expanded="false" />
+            <element signature="e#2477#2478#0" expanded="false" />
+            <element signature="e#2678#2679#0" expanded="false" />
+            <element signature="e#2717#2718#0" expanded="false" />
+            <element signature="e#2901#2902#0" expanded="false" />
+            <element signature="e#2946#2947#0" expanded="false" />
+            <element signature="e#3145#3146#0" expanded="false" />
+            <element signature="e#3184#3185#0" expanded="false" />
+            <element signature="e#3384#3385#0" expanded="false" />
+            <element signature="e#3423#3424#0" expanded="false" />
+            <element signature="e#3863#3864#0" expanded="false" />
+            <element signature="e#3902#3903#0" expanded="false" />
+            <element signature="e#4102#4103#0" expanded="false" />
+            <element signature="e#4141#4142#0" expanded="false" />
+            <element signature="e#4342#4343#0" expanded="false" />
+            <element signature="e#4381#4382#0" expanded="false" />
+            <element signature="e#4583#4584#0" expanded="false" />
+            <element signature="e#4622#4623#0" expanded="false" />
+            <element signature="e#4823#4824#0" expanded="false" />
+            <element signature="e#4862#4863#0" expanded="false" />
+            <element signature="e#5014#5015#0" expanded="false" />
+            <element signature="e#5052#5053#0" expanded="false" />
+            <element signature="e#5173#5174#0" expanded="false" />
+            <element signature="e#5210#5211#0" expanded="false" />
+            <element signature="e#5351#5352#0" expanded="false" />
+            <element signature="e#5386#5387#0" expanded="false" />
+            <element signature="e#5456#5457#0" expanded="false" />
+            <element signature="e#5487#5488#0" expanded="false" />
+            <element signature="e#5730#5731#0" expanded="false" />
+            <element signature="e#5777#5778#0" expanded="false" />
+            <element signature="e#6029#6030#0" expanded="false" />
+            <element signature="e#6068#6069#0" expanded="false" />
+            <element signature="e#13196#13197#0" expanded="false" />
+            <element signature="e#13237#13238#0" expanded="false" />
+            <element signature="e#13375#13376#0" expanded="false" />
+            <element signature="e#13414#13415#0" expanded="false" />
+            <element signature="e#13900#13901#0" expanded="false" />
+            <element signature="e#13954#13955#0" expanded="false" />
+            <element signature="e#13998#13999#0" expanded="false" />
+            <element signature="e#14022#14023#0" expanded="false" />
+            <element signature="e#14118#14119#0" expanded="false" />
+            <element signature="e#14158#14159#0" expanded="false" />
+            <element signature="e#14343#14344#0" expanded="false" />
+            <element signature="e#14382#14383#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-94">
+          <caret line="61" column="58" selection-start-line="61" selection-start-column="58" selection-end-line="61" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2592,22 +2788,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/SettingsActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="192" column="0" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
+        <state relative-caret-position="326">
+          <caret line="588" column="29" selection-start-line="588" selection-start-column="29" selection-end-line="588" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4625#4976#0" expanded="true" />
-            <element signature="e#4975#4976#0" expanded="true" />
-            <element signature="e#5031#5382#0" expanded="true" />
-            <element signature="e#5381#5382#0" expanded="true" />
-            <element signature="e#5443#5806#0" expanded="true" />
-            <element signature="e#5805#5806#0" expanded="true" />
-            <element signature="e#5867#6230#0" expanded="true" />
-            <element signature="e#6229#6230#0" expanded="true" />
-            <element signature="e#6280#6621#0" expanded="true" />
-            <element signature="e#6620#6621#0" expanded="true" />
+            <element signature="e#10432#10674#0" expanded="true" />
+            <element signature="e#10673#10674#0" expanded="true" />
+            <element signature="e#13282#13358#0" expanded="false" />
+            <element signature="e#21188#21251#0" expanded="true" />
+            <element signature="e#21859#21922#0" expanded="true" />
+            <element signature="e#22547#22610#0" expanded="true" />
+            <element signature="e#23240#23303#0" expanded="true" />
+            <element signature="e#23952#24015#0" expanded="true" />
+            <element signature="e#24699#24762#0" expanded="true" />
+            <element signature="e#25411#25474#0" expanded="true" />
+            <element signature="e#26158#26221#0" expanded="true" />
+            <element signature="e#26731#26794#0" expanded="true" />
           </folding>
         </state>
       </provider>

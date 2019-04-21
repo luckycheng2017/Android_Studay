@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -506,23 +507,99 @@ public class MainActivity extends AppCompatActivity {
                 now.setTextColor(color);
                 percent.setTextColor(color);
                 increaseValue.setTextColor(color);
+                SQLiteDatabase stockParamerDB = stockParaDbaseHelper.getWritableDatabase();
+                Cursor cursor =stockParamerDB.query("StockParameter", null, "StockID = ?",
+                        new String[]{stock.id_}, null, null, null);
 
-//                if(dPercent <= -4.5 && stock.status == 0) {
-//                    stock.status = 1;
-//                    stockMap.put(stock.id_, stock);
-//                    text += "下跌提示" + getResources().getString(R.string.stock_increase_percent_title) + ":"
-//                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100; // 买1以100为单位，所以要除以100
-//                } else if(dPercent > -4.5 && stock.status== 1) {
-//                    stock.status = 0;
-//                    stockMap.put(stock.id_, stock);
-//                    text += "恢复可控" + getResources().getString(R.string.stock_increase_percent_title) + ":"
-//                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
-//                }
-                // 还待完善
-//                if((Long.parseLong(stock.b1_) / 100 ) <= 500000) {
-//                    text += "买1锐减提示，" + getResources().getString(R.string.stock_increase_percent_title) + ":"
-//                            + String.format("%.2f", dPercent) + ", " + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
-//                }
+                if (cursor.moveToFirst()) {
+                    if(dNow >= cursor.getDouble(cursor.getColumnIndex("Rise"))
+                            && cursor.getInt(cursor.getColumnIndex("RiseSwitch")) == 1
+                            && stock.riseStatus == 0) {
+                        stock.riseStatus = 1;
+                        stockMap.put(stock.id_, stock);
+                        text += "涨价提示:" + "最新：" + String.format("%.2f", dNow) + ", "
+                                + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                                + String.format("%.2f", dPercent) + ", "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
+                    } else if(dNow < cursor.getDouble(cursor.getColumnIndex("Rise"))
+                            && cursor.getInt(cursor.getColumnIndex("RiseSwitch")) == 1
+                            && stock.riseStatus == 1) {
+                        stock.riseStatus = 0;
+                        stockMap.put(stock.id_, stock);
+                        text += "涨价恢复:" + "最新：" + String.format("%.2f", dNow) + ", "
+                                + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                                + String.format("%.2f", dPercent) + ", "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
+                    }
+
+                    if(dNow <= cursor.getDouble(cursor.getColumnIndex("Fall"))
+                            && cursor.getInt(cursor.getColumnIndex("FallSwitch")) == 1
+                            && stock.fallStatus == 0) {
+                        stock.fallStatus = 1;
+                        stockMap.put(stock.id_, stock);
+                        text += "跌价提示：" + "最新：" + String.format("%.2f", dNow) + ", "
+                                + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                                + String.format("%.2f", dPercent) + ", "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100; // 买1以100为单位，所以要除以100
+                    } else if(dNow > cursor.getDouble(cursor.getColumnIndex("Fall"))
+                            && cursor.getInt(cursor.getColumnIndex("FallSwitch")) == 1
+                            && stock.fallStatus == 1) {
+                        stock.fallStatus = 0;
+                        stockMap.put(stock.id_, stock);
+                        text += "跌价恢复：" + "最新：" + String.format("%.2f", dNow) + ", "
+                                + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                                + String.format("%.2f", dPercent) + ", "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
+                    }
+
+                    if(dNow >= cursor.getDouble(cursor.getColumnIndex("RiseAmount"))
+                            && cursor.getInt(cursor.getColumnIndex("RiseAmountSwitch")) == 1
+                            && stock.riseAmountStatus == 0) {
+                        stock.riseAmountStatus = 1;
+                        stockMap.put(stock.id_, stock);
+                        text += "涨幅提示：" + "最新：" + String.format("%.2f", dNow) + ", "
+                                + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                                + String.format("%.2f", dNow) + String.format("%.2f", dPercent) + ", "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100; // 买1以100为单位，所以要除以100
+                    } else if(dNow < cursor.getDouble(cursor.getColumnIndex("RiseAmount"))
+                            && cursor.getInt(cursor.getColumnIndex("RiseAmountSwitch")) == 1
+                            && stock.riseAmountStatus == 1) {
+                        stock.riseAmountStatus = 0;
+                        stockMap.put(stock.id_, stock);
+                        text += "涨幅恢复：" + "最新：" + String.format("%.2f", dNow) + ", "
+                                + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                                + String.format("%.2f", dPercent) + ", "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
+                    }
+
+                    if(dNow <= cursor.getDouble(cursor.getColumnIndex("FallAmount"))
+                            && cursor.getInt(cursor.getColumnIndex("FallAmountSwitch")) == 1
+                            && stock.fallAmountStatus == 0) {
+                        stock.fallAmountStatus = 1;
+                        stockMap.put(stock.id_, stock);
+                        text += "跌幅提示：" + "最新：" + String.format("%.2f", dNow) + ", "
+                                + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                                + String.format("%.2f", dNow) + String.format("%.2f", dPercent) + ", "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100; // 买1以100为单位，所以要除以100
+                    } else if(dNow > cursor.getDouble(cursor.getColumnIndex("FallAmount"))
+                            && cursor.getInt(cursor.getColumnIndex("FallAmountSwitch")) == 1
+                            && stock.fallAmountStatus == 1) {
+                        stock.fallAmountStatus = 0;
+                        stockMap.put(stock.id_, stock);
+                        text += "跌幅恢复：" + "最新：" + String.format("%.2f", dNow) + ", "
+                                + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                                + String.format("%.2f", dPercent) + ", "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
+                    }
+
+                    if((Long.parseLong(stock.b1_) / 100 ) <= cursor.getLong(cursor.getColumnIndex("Buy1Value"))
+                            && cursor.getInt(cursor.getColumnIndex("Buy1ValueSwitch")) == 1) {
+                        text += "买1锐减提示：" + "最新：" + String.format("%.2f", dNow) + ", "
+                                + getResources().getString(R.string.stock_increase_percent_title) + ":"
+                                + String.format("%.2f", dPercent) + ", "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
+                    }
+                }
             }
             row.addView(percent);
             row.addView(increaseValue);

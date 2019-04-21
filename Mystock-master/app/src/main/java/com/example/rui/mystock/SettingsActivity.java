@@ -59,7 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
             priceFall.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex("Fall"))));
             priceRiseAmount.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex("RiseAmount"))));
             priceFallAmount.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex("FallAmount"))));
-            buy1Set.setText(String.valueOf(cursor.getInt(cursor.getColumnIndex("Buy1Value"))));
+            buy1Set.setText(String.valueOf(cursor.getLong(cursor.getColumnIndex("Buy1Value"))));
 
             if (cursor.getInt(cursor.getColumnIndex("RiseSwitch")) == 1) {
                 priceRiseSwitch.setChecked(true);
