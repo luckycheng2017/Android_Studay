@@ -1,5 +1,6 @@
 package com.example.rui.mystock;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.media.RingtoneManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
@@ -330,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
         nBuilder.setContentText(text);
         nBuilder.setVibrate(new long[]{100, 100, 100});
         nBuilder.setLights(Color.RED, 1000, 1000);
+        nBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 
         NotificationManager notifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notifyMgr.notify(id, nBuilder.build());
