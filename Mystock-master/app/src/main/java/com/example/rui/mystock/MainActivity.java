@@ -112,20 +112,34 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             if(SelectedStockItems_.size() == 1) {
-                Double dNow = Double.parseDouble(stockMap.get(SelectedStockItems_.firstElement()).now_);
-                Double dYesterday = Double.parseDouble(stockMap.get(SelectedStockItems_.firstElement()).yesterday_);
-                Double dIncrease = dNow - dYesterday;
-                Double dPercent = dIncrease / dYesterday * 100;
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("stockID", stockMap.get(SelectedStockItems_.firstElement()).id_);
-                bundle.putString("nowPrice", stockMap.get(SelectedStockItems_.firstElement()).now_.substring(0,
-                        stockMap.get(SelectedStockItems_.firstElement()).now_.length() - 1));
-                bundle.putString("amount", String.format("%.2f", dPercent) + "%");
-                bundle.putString("buy1", stockMap.get(SelectedStockItems_.firstElement()).b1_.substring(0,
-                        stockMap.get(SelectedStockItems_.firstElement()).b1_.length() - 2));
-                intent.putExtras(bundle);
-                startActivity(intent);
+                Double dOpen = Double.parseDouble(stockMap.get(SelectedStockItems_.firstElement()).open_);
+                Double dB1 = Double.parseDouble(stockMap.get(SelectedStockItems_.firstElement()).bp1_);
+                Double dS1 = Double.parseDouble(stockMap.get(SelectedStockItems_.firstElement()).sp1_);
+                if(dOpen == 0 && dB1 == 0 && dS1 == 0) {
+                    Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("stockID", stockMap.get(SelectedStockItems_.firstElement()).id_);
+                    bundle.putString("nowPrice", "--");
+                    bundle.putString("amount", "--");
+                    bundle.putString("buy1", "--");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+                    Double dNow = Double.parseDouble(stockMap.get(SelectedStockItems_.firstElement()).now_);
+                    Double dYesterday = Double.parseDouble(stockMap.get(SelectedStockItems_.firstElement()).yesterday_);
+                    Double dIncrease = dNow - dYesterday;
+                    Double dPercent = dIncrease / dYesterday * 100;
+                    Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("stockID", stockMap.get(SelectedStockItems_.firstElement()).id_);
+                    bundle.putString("nowPrice", stockMap.get(SelectedStockItems_.firstElement()).now_.substring(0,
+                            stockMap.get(SelectedStockItems_.firstElement()).now_.length() - 1));
+                    bundle.putString("amount", String.format("%.2f", dPercent) + "%");
+                    bundle.putString("buy1", stockMap.get(SelectedStockItems_.firstElement()).b1_.substring(0,
+                            stockMap.get(SelectedStockItems_.firstElement()).b1_.length() - 2));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
             return true;
         }
@@ -187,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
         public int fallAmountStatus; // 0:正常, 1:下跌
         public int averageDiffRiseStatus; // 0:正常, 1:上涨
         public int averageDiffFallStatus; // 0:正常, 1:下跌
+        public int riseStopStatus; //0:正常, 1:涨停
     }
 
     public TreeMap<String, Stock> sinaResponseToStocks(String response){
@@ -215,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
                 stockNow.fallAmountStatus = stockMap.get(stockNow.id_).fallAmountStatus;
                 stockNow.averageDiffRiseStatus = stockMap.get(stockNow.id_).averageDiffRiseStatus;
                 stockNow.averageDiffFallStatus = stockMap.get(stockNow.id_).averageDiffFallStatus;
+                stockNow.riseStopStatus = stockMap.get(stockNow.id_).riseStopStatus;
             }
 
             String[] values = right.split(",");
@@ -470,7 +486,6 @@ public class MainActivity extends AppCompatActivity {
 
             String text = "";
             String sBuy = getResources().getString(R.string.stock_buy);
-            String sSell = getResources().getString(R.string.stock_sell);
             String sid = stock.id_;
             sid = sid.replaceAll("sh", "");
             sid = sid.replaceAll("sz", "");
@@ -584,6 +599,20 @@ public class MainActivity extends AppCompatActivity {
                         stock.fallAmountStatus = 0;
                         stockMap.put(stock.id_, stock);
                         text += "跌幅恢复：" + String.format("%.2f", dNow) + ", 幅"
+                                + String.format("%.2f", dPercent) + "%, "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
+                    }
+
+                    if(dPercent >= 10 && stock.riseStopStatus == 0) {
+                        stock.riseStopStatus = 1;
+                        stockMap.put(stock.id_, stock);
+                        text += "涨停提示：" + String.format("%.2f", dNow) + ", 幅"
+                                + String.format("%.2f", dPercent) + "%, "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100; // 买1以100为单位，所以要除以100
+                    } else if(dPercent < 10 && stock.riseStopStatus == 1) {
+                        stock.riseStopStatus = 0;
+                        stockMap.put(stock.id_, stock);
+                        text += "涨停恢复：" + String.format("%.2f", dNow) + ", 幅"
                                 + String.format("%.2f", dPercent) + "%, "
                                 + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
                     }

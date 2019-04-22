@@ -60,7 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
             priceRise.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex("Rise"))));
             priceFall.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex("Fall"))));
             priceRiseAmount.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex("RiseAmount"))));
-            priceFallAmount.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex("FallAmount"))));
+            priceFallAmount.setText(String.valueOf(0 - cursor.getDouble(cursor.getColumnIndex("FallAmount"))));
             buy1Set.setText(String.valueOf(cursor.getLong(cursor.getColumnIndex("Buy1Value"))));
 
             if (cursor.getInt(cursor.getColumnIndex("RiseSwitch")) == 1) {
@@ -182,7 +182,7 @@ public class SettingsActivity extends AppCompatActivity {
             values.put("Rise", Double.valueOf(priceRise.getText().toString()));
             values.put("Fall", Double.valueOf(priceFall.getText().toString()));
             values.put("RiseAmount", Double.valueOf(priceRiseAmount.getText().toString()));
-            values.put("FallAmount", Double.valueOf(priceFallAmount.getText().toString()));
+            values.put("FallAmount", 0 - Double.valueOf(priceFallAmount.getText().toString()));
             values.put("Buy1Value", Integer.valueOf(buy1Set.getText().toString()));
 
             values.put("RiseSwitch", priceRiseSwitchStatus);
