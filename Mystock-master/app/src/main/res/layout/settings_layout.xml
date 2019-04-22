@@ -178,7 +178,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:maxLength="9"
+            android:maxLength="15"
             android:layout_weight="0.8"
             android:id="@+id/buy1_set"/>
         <Switch

@@ -552,7 +552,7 @@ public class MainActivity extends AppCompatActivity {
                                 + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
                     }
 
-                    if(dNow >= cursor.getDouble(cursor.getColumnIndex("RiseAmount"))
+                    if(dPercent >= cursor.getDouble(cursor.getColumnIndex("RiseAmount"))
                             && cursor.getInt(cursor.getColumnIndex("RiseAmountSwitch")) == 1
                             && stock.riseAmountStatus == 0) {
                         stock.riseAmountStatus = 1;
@@ -560,7 +560,7 @@ public class MainActivity extends AppCompatActivity {
                         text += "涨幅提示：" + String.format("%.2f", dNow) + ", 幅"
                                 + String.format("%.2f", dPercent) + "%, "
                                 + sBuy + "1:" + Long.parseLong(stock.b1_)/100; // 买1以100为单位，所以要除以100
-                    } else if(dNow < cursor.getDouble(cursor.getColumnIndex("RiseAmount"))
+                    } else if(dPercent < cursor.getDouble(cursor.getColumnIndex("RiseAmount"))
                             && cursor.getInt(cursor.getColumnIndex("RiseAmountSwitch")) == 1
                             && stock.riseAmountStatus == 1) {
                         stock.riseAmountStatus = 0;
@@ -570,7 +570,7 @@ public class MainActivity extends AppCompatActivity {
                                 + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
                     }
 
-                    if(dNow <= cursor.getDouble(cursor.getColumnIndex("FallAmount"))
+                    if(dPercent <= cursor.getDouble(cursor.getColumnIndex("FallAmount"))
                             && cursor.getInt(cursor.getColumnIndex("FallAmountSwitch")) == 1
                             && stock.fallAmountStatus == 0) {
                         stock.fallAmountStatus = 1;
@@ -578,7 +578,7 @@ public class MainActivity extends AppCompatActivity {
                         text += "跌幅提示：" + String.format("%.2f", dNow) + ", 幅"
                                 + String.format("%.2f", dPercent) + "%, "
                                 + sBuy + "1:" + Long.parseLong(stock.b1_)/100; // 买1以100为单位，所以要除以100
-                    } else if(dNow > cursor.getDouble(cursor.getColumnIndex("FallAmount"))
+                    } else if(dPercent > cursor.getDouble(cursor.getColumnIndex("FallAmount"))
                             && cursor.getInt(cursor.getColumnIndex("FallAmountSwitch")) == 1
                             && stock.fallAmountStatus == 1) {
                         stock.fallAmountStatus = 0;
