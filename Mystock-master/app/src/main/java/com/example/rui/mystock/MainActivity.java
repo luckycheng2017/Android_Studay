@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void querySinaStocks(String list){
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
+        final RequestQueue queue = Volley.newRequestQueue(this);
         String url ="http://hq.sinajs.cn/list=" + list;
         //http://hq.sinajs.cn/list=sh600000,sh600536
 
@@ -279,6 +279,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         updateStockListView(sinaResponseToStocks(response));
+                        queue.stop();
                     }
                 },
                 new Response.ErrorListener() {
