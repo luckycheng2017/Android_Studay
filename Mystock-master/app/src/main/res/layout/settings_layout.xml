@@ -13,48 +13,53 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
+            android:textSize="16dp"
             android:text="股价:"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
+            android:textSize="16dp"
             android:text="--"
             android:id="@+id/stockNowPrice"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:textSize="12dp"
+            android:textSize="16dp"
             android:text="均价:"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
+            android:textSize="16dp"
             android:text="--"
             android:id="@+id/nowAveragePrice"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textSize="12dp"
+            android:textSize="16dp"
             android:text="涨幅:"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
+            android:textSize="16dp"
             android:text="--"
             android:id="@+id/riseAmount"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:textSize="12dp"
+            android:textSize="16dp"
             android:text="买1数:"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
+            android:textSize="16dp"
             android:text="--"
             android:id="@+id/buy1Num"/>
     </LinearLayout>
@@ -145,15 +150,10 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="股价跌幅提示:"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text=" -"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="numberDecimal|numberSigned"
             android:maxLength="9"
             android:layout_weight="0.8"
             android:id="@+id/price_fall_amount"/>
