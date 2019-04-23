@@ -1,6 +1,5 @@
 package com.example.rui.mystock;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,7 +12,6 @@ import android.media.RingtoneManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,15 +48,19 @@ public class MainActivity extends AppCompatActivity {
     private final static String SzIndex = "sz399001";
     private final static String ChuangIndex = "sz399006";
     private final static String StockIdsKey_ = "StockIds";
-    private final static int StockLargeTrade_ = 1000000;
 
     private static TreeMap<String, Stock> stockMap = new TreeMap();
     private StockParameterDatabaseHelper stockParaDbaseHelper;
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Instantiate the RequestQueue.
+        queue = Volley.newRequestQueue(this);
+        queue.start();
 
         stockParaDbaseHelper = new StockParameterDatabaseHelper(this, "StockParameter.db", null, 1);
 
@@ -268,8 +270,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void querySinaStocks(String list){
-        // Instantiate the RequestQueue.
-        final RequestQueue queue = Volley.newRequestQueue(this);
+
         String url ="http://hq.sinajs.cn/list=" + list;
         //http://hq.sinajs.cn/list=sh600000,sh600536
 
@@ -279,7 +280,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         updateStockListView(sinaResponseToStocks(response));
-                        queue.stop();
                     }
                 },
                 new Response.ErrorListener() {
