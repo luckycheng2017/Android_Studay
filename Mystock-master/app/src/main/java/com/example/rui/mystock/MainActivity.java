@@ -1,6 +1,7 @@
 package com.example.rui.mystock;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.media.RingtoneManager;
+import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
@@ -342,6 +344,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendNotifation(int id, String title, String text){
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         NotificationCompat.Builder nBuilder =
                 new NotificationCompat.Builder(this);
         nBuilder.setSmallIcon(R.drawable.ic_launcher);
@@ -350,9 +354,17 @@ public class MainActivity extends AppCompatActivity {
         nBuilder.setVibrate(new long[]{100, 100, 100});
         nBuilder.setLights(Color.RED, 1000, 1000);
         nBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        nBuilder.setContentIntent(pendingIntent);
 
         NotificationManager notifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notifyMgr.notify(id, nBuilder.build());
+    }
+
+    public void wakeUpScreen(Context context) {
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_DIM_WAKE_LOCK, "bright");
+        wl.acquire();
+        wl.release();
     }
 
     public void updateStockListView(TreeMap<String, Stock> stockMap){
@@ -676,8 +688,11 @@ public class MainActivity extends AppCompatActivity {
 //            if(Double.parseDouble(stock.s5_ )>= StockLargeTrade_) {
 //                text += sSell + "5:" + stock.s5_ + ",";
 //            }
-            if(text.length() > 0)
+            if(text.length() > 0) {
                 sendNotifation(Integer.parseInt(sid), stock.name_, text);
+                wakeUpScreen(MainActivity.this);
+            }
         }
+
     }
 }
