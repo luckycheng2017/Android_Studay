@@ -205,7 +205,8 @@ public class MainActivity extends AppCompatActivity {
         public int fallAmountStatus; // 0:正常, 1:下跌
         public int averageDiffRiseStatus; // 0:正常, 1:上涨
         public int averageDiffFallStatus; // 0:正常, 1:下跌
-        public int riseStopStatus; //0:正常, 1:涨停
+        public int riseStopStatus; // 0:正常, 1:涨停
+        public int fallStopStatus; // 0:正常, 1:跌停
     }
 
     public TreeMap<String, Stock> sinaResponseToStocks(String response){
@@ -235,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
                 stockNow.averageDiffRiseStatus = stockMap.get(stockNow.id_).averageDiffRiseStatus;
                 stockNow.averageDiffFallStatus = stockMap.get(stockNow.id_).averageDiffFallStatus;
                 stockNow.riseStopStatus = stockMap.get(stockNow.id_).riseStopStatus;
+                stockNow.fallStopStatus = stockMap.get(stockNow.id_).fallStopStatus;
             }
 
             String[] values = right.split(",");
@@ -626,6 +628,20 @@ public class MainActivity extends AppCompatActivity {
                         stock.riseStopStatus = 0;
                         stockMap.put(stock.id_, stock);
                         text += "涨停恢复：" + String.format("%.2f", dNow) + "; "
+                                + String.format("%.2f", dPercent) + "%, "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
+                    }
+
+                    if(dPercent <= -10 && stock.fallStopStatus == 0) {
+                        stock.fallStopStatus = 1;
+                        stockMap.put(stock.id_, stock);
+                        text += "跌停提示：" + String.format("%.2f", dNow) + "; "
+                                + String.format("%.2f", dPercent) + "%, "
+                                + sBuy + "1:" + Long.parseLong(stock.b1_)/100; // 买1以100为单位，所以要除以100
+                    } else if(dPercent > -10 && stock.fallStopStatus == 1) {
+                        stock.fallStopStatus = 0;
+                        stockMap.put(stock.id_, stock);
+                        text += "跌停恢复：" + String.format("%.2f", dNow) + "; "
                                 + String.format("%.2f", dPercent) + "%, "
                                 + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
                     }
