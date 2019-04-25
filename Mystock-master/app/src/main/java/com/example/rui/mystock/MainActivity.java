@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 refreshStocks();
             }
-        }, 0, 2000); // 2 seconds
+        }, 0, 1500); // 2 seconds
     }
 
     @Override
