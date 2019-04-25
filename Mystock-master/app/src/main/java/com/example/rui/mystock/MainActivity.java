@@ -139,8 +139,9 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putString("nowPrice", stockMap.get(SelectedStockItems_.firstElement()).now_.substring(0,
                             stockMap.get(SelectedStockItems_.firstElement()).now_.length() - 1));
                     bundle.putString("amount", String.format("%.2f", dPercent) + "%");
-                    bundle.putString("buy1", stockMap.get(SelectedStockItems_.firstElement()).b1_.substring(0,
-                            stockMap.get(SelectedStockItems_.firstElement()).b1_.length() - 2));
+                    bundle.putString("buy1", String.valueOf(
+                            Long.parseLong(stockMap.get(SelectedStockItems_.firstElement()).b1_)/100));
+
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
