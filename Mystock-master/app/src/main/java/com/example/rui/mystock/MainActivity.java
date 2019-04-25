@@ -54,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
     private static TreeMap<String, Stock> stockMap = new TreeMap();
     private StockParameterDatabaseHelper stockParaDbaseHelper;
     private RequestQueue queue;
+    private static UpdateStockListener mUpdateStockListener;
+
+    public interface UpdateStockListener {
+        void updateStock(String stockID, Stock stock);
+    }
+
+    public static void setUpdateStockListener(UpdateStockListener updateStockListener) {
+        mUpdateStockListener = updateStockListener;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +90,10 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 refreshStocks();
             }
-        }, 0, 1500); // 2 seconds
+        }, 0, 1500); // 1.5 seconds
     }
+
+
 
     @Override
     public void onDestroy() {
@@ -653,6 +664,10 @@ public class MainActivity extends AppCompatActivity {
                                 + String.format("%.2f", dPercent) + "%, "
                                 + sBuy + "1:" + Long.parseLong(stock.b1_)/100;
                     }
+
+                    if (mUpdateStockListener != null) {
+                        mUpdateStockListener.updateStock(stock.id_, stock);
+                    }
                 }
             }
             row.addView(percent);
@@ -709,7 +724,11 @@ public class MainActivity extends AppCompatActivity {
                 sendNotifation(Integer.parseInt(sid), stock.name_, text);
                 wakeUpScreen(MainActivity.this);
             }
+
+
         }
 
     }
+
+
 }

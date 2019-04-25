@@ -22,24 +22,30 @@ public class SettingsActivity extends AppCompatActivity {
     private int priceRiseAmountSwitchStatus;
     private int priceFallAmountSwitchStatus;
     private int buy1SwitchStatus;
+    private static String STOCK_ID;
+
+    private TextView nowPrice;
+    private TextView riseAmount;
+    private TextView buy1Num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_layout);
 
+        nowPrice = (TextView) findViewById(R.id.stockNowPrice);
+        riseAmount = (TextView) findViewById(R.id.riseAmount);
+        buy1Num = (TextView) findViewById(R.id.buy1Num);
+
         stockParaDbaseHelper = new StockParameterDatabaseHelper(this, "StockParameter.db", null, 1);
         SQLiteDatabase stockParameterDB = stockParaDbaseHelper.getWritableDatabase();
 
         Intent intent = getIntent();
 
-        TextView nowPrice = (TextView) findViewById(R.id.stockNowPrice);
+        STOCK_ID = intent.getStringExtra("stockID");
+
         nowPrice.setText(intent.getStringExtra("nowPrice"));
-
-        TextView riseAmount = (TextView) findViewById(R.id.riseAmount);
         riseAmount.setText(intent.getStringExtra("amount"));
-
-        TextView buy1Num = (TextView) findViewById(R.id.buy1Num);
         buy1Num.setText(intent.getStringExtra("buy1"));
 
         EditText priceRise = (EditText) findViewById(R.id.price_rise);
@@ -55,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
         Switch buy1Switch = (Switch) findViewById(R.id.buy1_switch);
 
         Cursor cursor =stockParameterDB.query("StockParameter", null, "StockID = ?",
-                new String[]{intent.getStringExtra("stockID")}, null, null, null);
+                new String[]{STOCK_ID}, null, null, null);
         if (cursor.moveToFirst()) {
             priceRise.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex("Rise"))));
             priceFall.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex("Fall"))));
@@ -161,6 +167,21 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         stockParameterDB.close();
+
+        MainActivity.setUpdateStockListener(new MainActivity.UpdateStockListener() {
+            @Override
+            public void updateStock(String stockID, MainActivity.Stock stock) {
+                if (stockID.equals(STOCK_ID)) {
+                    Double dNow = Double.parseDouble(stock.now_);
+                    Double dYesterday = Double.parseDouble(stock.yesterday_);
+                    Double dIncrease = dNow - dYesterday;
+                    Double dPercent = dIncrease / dYesterday * 100;
+                    nowPrice.setText(stock.now_.substring(0, stock.now_.length() - 1));
+                    riseAmount.setText(String.format("%.2f", dPercent) + "%");
+                    buy1Num.setText(String.valueOf(Long.parseLong(stock.b1_)/100));
+                }
+            }
+        });
     }
 
     public void saveParameter(View view) {

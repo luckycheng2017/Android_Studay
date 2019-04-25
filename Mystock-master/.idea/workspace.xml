@@ -58,11 +58,15 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="83" column="16" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
+            <state relative-caret-position="329">
+              <caret line="671" column="13" selection-start-line="671" selection-start-column="13" selection-end-line="671" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#15180#15256#0" expanded="false" />
+                <element signature="e#3069#3197#0" expanded="true" />
+                <element signature="e#3196#3197#0" expanded="true" />
+                <element signature="e#12008#12250#0" expanded="true" />
+                <element signature="e#12249#12250#0" expanded="true" />
+                <element signature="e#15498#15574#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -70,14 +74,14 @@
       </file>
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="196">
               <caret line="7" column="74" selection-start-line="7" selection-start-column="74" selection-end-line="7" selection-end-column="74" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-manifest">
+            <state />
           </provider>
         </entry>
       </file>
@@ -87,21 +91,9 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2604">
+            <state relative-caret-position="742">
               <caret line="93" column="37" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="37" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StockParameterDatabaseHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/StockParameterDatabaseHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="24" column="30" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -109,10 +101,14 @@
       <file leaf-file-name="SettingsActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/SettingsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5376">
-              <caret line="204" column="0" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
+            <state relative-caret-position="-3388">
+              <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4819#5170#0" expanded="true" />
+                <element signature="e#5169#5170#0" expanded="true" />
+                <element signature="e#6898#7651#0" expanded="true" />
+                <element signature="e#7650#7651#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1445,6 +1441,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/StockParameterDatabaseHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/settings_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/UpdataStockListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/SettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/MainActivity.java" />
       </list>
@@ -1479,9 +1476,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1574,9 +1569,11 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1587,7 +1584,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="1fe0f0f5" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_23_arm" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../callback-master/Callback" />
     <property name="device.picker.selection" value="85GBBM923J3M" />
     <property name="AllocationView.GroupBy" value="Group by Allocator" />
     <property name="UI_DESIGNER_EDITOR_MODE.CaptureAnalysis.SHOW" value="false" />
@@ -2048,7 +2045,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1055" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21158129" sideWeight="0.49786097" order="14" side_tool="false" content_ui="tabs" />
@@ -2057,6 +2054,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.50213903" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29064587" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32882884" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -2080,7 +2078,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912844" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19265033" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2103,25 +2100,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2100">
-          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -2138,7 +2116,11 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15180#15256#0" expanded="false" />
+            <element signature="e#3069#3197#0" expanded="true" />
+            <element signature="e#3196#3197#0" expanded="true" />
+            <element signature="e#12008#12250#0" expanded="true" />
+            <element signature="e#12249#12250#0" expanded="true" />
+            <element signature="e#15498#15574#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2203,7 +2185,11 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15180#15256#0" expanded="false" />
+            <element signature="e#3069#3197#0" expanded="true" />
+            <element signature="e#3196#3197#0" expanded="true" />
+            <element signature="e#12008#12250#0" expanded="true" />
+            <element signature="e#12249#12250#0" expanded="true" />
+            <element signature="e#15498#15574#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2407,17 +2393,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2604">
-          <caret line="93" column="37" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AndroidSDK/sources/android-23/android/app/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
@@ -2461,43 +2436,81 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="7" column="74" selection-start-line="7" selection-start-column="74" selection-end-line="7" selection-end-column="74" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/SettingsActivity.java">
+    <entry file="file://$USER_HOME$/AndroidSDK/sources/android-23/android/content/ContextWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5376">
-          <caret line="204" column="0" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
+        <state relative-caret-position="289">
+          <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+          <folding>
+            <element signature="e#3060#3061#0" expanded="false" />
+            <element signature="e#3112#3113#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/UpdataStockListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/StockParameterDatabaseHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-252">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/StockParameterDatabaseHelper.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="24" column="30" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="30" />
+        <state relative-caret-position="742">
+          <caret line="93" column="37" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3388">
+          <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4819#5170#0" expanded="true" />
+            <element signature="e#5169#5170#0" expanded="true" />
+            <element signature="e#6898#7651#0" expanded="true" />
+            <element signature="e#7650#7651#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rui/mystock/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="83" column="16" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
+        <state relative-caret-position="329">
+          <caret line="671" column="13" selection-start-line="671" selection-start-column="13" selection-end-line="671" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15180#15256#0" expanded="false" />
+            <element signature="e#3069#3197#0" expanded="true" />
+            <element signature="e#3196#3197#0" expanded="true" />
+            <element signature="e#12008#12250#0" expanded="true" />
+            <element signature="e#12249#12250#0" expanded="true" />
+            <element signature="e#15498#15574#0" expanded="false" />
           </folding>
         </state>
       </provider>
